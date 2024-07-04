@@ -1,15 +1,17 @@
+import styles from "./VolumeSlider.module.css";
+
 const VolumeSlider = () => {
   return (
-    <div className="bar__volume-block volume">
-      <div className="volume__content">
-        <div className="volume__image">
-          <svg className="volume__svg">
+    <div className={styles.barVolumeBlock}>
+      <div className={styles.volumeContent}>
+        <div className={styles.volumeImage}>
+          <svg className={styles.volumeSvg}>
             <use xlinkHref="img/icon/sprite.svg#icon-volume" />
           </svg>
         </div>
-        <div className="volume__progress _btn">
+        <div className={styles.volumeProgress}>
           <input
-            className="volume__progress-line _btn"
+            className={styles.volumeProgressLine}
             type="range"
             name="range"
           />
