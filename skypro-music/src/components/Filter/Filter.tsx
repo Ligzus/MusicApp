@@ -1,12 +1,18 @@
+import styles from "./Filter.module.css";
+
 const Filter = () => {
-    return (
-        <div className="centerblock__filter filter">
-        <div className="filter__title">Искать по:</div>
-        <div className="filter__button button-author _btn-text">исполнителю</div>
-        <div className="filter__button button-year _btn-text">году выпуска</div>
-        <div className="filter__button button-genre _btn-text">жанру</div>
+  return (
+    <div className={styles.centerblockFilter}>
+      <div className={styles.filterTitle}>Искать по:</div>
+      <div className={`${styles.filterButton} ${styles.btnText}`}>
+        исполнителю
       </div>
-    );
+      <div className={`${styles.filterButton} ${styles.btnText}`}>
+        году выпуска
+      </div>
+      <div className={`${styles.filterButton} ${styles.btnText}`}>жанру</div>
+    </div>
+  );
 };
 
 export default Filter;
