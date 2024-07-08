@@ -4,9 +4,10 @@ import Track from "../Track/Track";
 
 type PlaylistProps = {
   tracks: Track_Type[];
+  error: string;
 };
 
-const Playlist = ({ tracks }: PlaylistProps) => {
+const Playlist = ({ tracks, error }: PlaylistProps) => {
   return (
     <div className={styles.centerblockContent}>
       <div className={styles.contentTitle}>
@@ -20,9 +21,11 @@ const Playlist = ({ tracks }: PlaylistProps) => {
         </div>
       </div>
       <div className={styles.contentPlaylist}>
-        {tracks.map((track) => (
-          <Track key={track.id} track={track} />
-        ))}
+        {error ? (
+          <p>{error}</p>
+        ) : (
+          tracks.map((track) => <Track key={track.id} track={track} />)
+        )}
       </div>
     </div>
   );
