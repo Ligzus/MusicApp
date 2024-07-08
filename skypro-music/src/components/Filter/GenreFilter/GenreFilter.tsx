@@ -7,7 +7,12 @@ type GenreFilterProps = {
   handleFilter: () => void;
 };
 
-const GenreFilter = ({ title, isActive, list, handleFilter }: GenreFilterProps) => {
+const GenreFilter = ({
+  title,
+  isActive,
+  list,
+  handleFilter,
+}: GenreFilterProps) => {
   return (
     <div>
       <div

@@ -11,7 +11,7 @@ const Track = ({ track }: TrackProps) => {
   const formatDuration = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   };
 
   return (
@@ -39,7 +39,9 @@ const Track = ({ track }: TrackProps) => {
           <svg className={styles.trackTimeSvg}>
             <use xlinkHref="img/icon/sprite.svg#icon-like" />
           </svg>
-          <span className={styles.trackTimeText}>{formatDuration(duration_in_seconds)}</span>
+          <span className={styles.trackTimeText}>
+            {formatDuration(duration_in_seconds)}
+          </span>
         </div>
       </div>
     </div>

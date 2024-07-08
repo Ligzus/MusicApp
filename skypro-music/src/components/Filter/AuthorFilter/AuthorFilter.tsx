@@ -7,7 +7,12 @@ type AuthorFilterProps = {
   handleFilter: () => void;
 };
 
-const AuthorFilter = ({ title, isActive, list, handleFilter }: AuthorFilterProps) => {
+const AuthorFilter = ({
+  title,
+  isActive,
+  list,
+  handleFilter,
+}: AuthorFilterProps) => {
   return (
     <div>
       <div

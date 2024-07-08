@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Track_Type } from "@/types/tracks";
 import styles from "./Filter.module.css";
@@ -34,10 +34,10 @@ const Filter = ({ tracks }: FilterProps) => {
       }
     };
 
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
 
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
@@ -50,13 +50,13 @@ const Filter = ({ tracks }: FilterProps) => {
         list={uniqueAuthors}
         handleFilter={() => handleFilter("author")}
       />
-      <ReleaseDateFilter 
+      <ReleaseDateFilter
         title="году"
         isActive={activeFilter === "release_date"}
         list={uniqueReleaseDate}
         handleFilter={() => handleFilter("release_date")}
       />
-      <GenreFilter 
+      <GenreFilter
         title="жанру"
         isActive={activeFilter === "genre"}
         list={uniqueGenre}
