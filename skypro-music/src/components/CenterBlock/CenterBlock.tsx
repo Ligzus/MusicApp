@@ -3,10 +3,10 @@ import Playlist from "../Playlist/Playlist";
 import Search from "../Search/Search";
 import styles from "../CenterBlock/CenterBlock.module.css";
 import { getTracks } from "@/api/tracks";
-import { Track_Type } from "@/types/tracks";
+import { TrackType } from "@/types/tracks";
 
 const CenterBlock = async () => {
-  let tracks: Track_Type[] = [];
+  let tracks: TrackType[] = [];
   let error: string = "";
 
   try {

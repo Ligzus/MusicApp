@@ -16,7 +16,7 @@ const AuthorFilter = ({
   return (
     <div>
       <div
-        className={`${styles.filterButton} ${styles.btnText}`}
+        className={isActive ? `${styles.filterButtonOpen} ${styles.btnText}` : `${styles.filterButton} ${styles.btnText}`}
         onClick={handleFilter}
       >
         {title}

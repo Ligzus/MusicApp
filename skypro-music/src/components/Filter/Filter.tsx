@@ -1,6 +1,6 @@
 "use client";
 
-import { Track_Type } from "@/types/tracks";
+import { TrackType } from "@/types/tracks";
 import styles from "./Filter.module.css";
 import AuthorFilter from "./AuthorFilter/AuthorFilter";
 import { getUniqueValues } from "@/utils/getUniqueValues";
@@ -11,7 +11,7 @@ import GenreFilter from "./GenreFilter/GenreFilter";
 const SORT_OPTIONS = ["По умолчанию", "Сначала новые", "Сначала старые"];
 
 type FilterProps = {
-  tracks: Track_Type[];
+  tracks: TrackType[];
 };
 
 const Filter = ({ tracks }: FilterProps) => {

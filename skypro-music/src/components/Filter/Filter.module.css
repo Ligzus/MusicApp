@@ -31,6 +31,18 @@
   margin-right: 10px;
 }
 
+.filterButtonOpen {
+  border: 1px solid #B672FF;
+  color: #B672FF;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 60px;
+  padding: 6px 20px;
+  margin-right: 10px;
+}
+
 .btnText:hover {
   border-color: #d9b6ff;
   color: #d9b6ff;

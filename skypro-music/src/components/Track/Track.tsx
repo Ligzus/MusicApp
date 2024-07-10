@@ -1,8 +1,8 @@
-import { Track_Type } from "@/types/tracks";
+import { TrackType } from "@/types/tracks";
 import styles from "./Track.module.css";
 
 type TrackProps = {
-  track: Track_Type;
+  track: TrackType;
 };
 
 const Track = ({ track }: TrackProps) => {

@@ -1,6 +1,6 @@
 import { UserType } from "./user";
 
-export type Track_Type = {
+export type TrackType = {
   id: number;
   name: string;
   author: string;
