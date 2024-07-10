@@ -1,7 +1,18 @@
+"use client";
+
+import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
 import VolumeSlider from "../VolumeSlider/VolumeSlider";
 import styles from "./Player.module.css";
 
 const Player = () => {
+  const { currentTrack } = useCurrentTrack();
+
+  if (!currentTrack) {
+    return null;
+  }
+
+  const { name, author } = currentTrack;
+
   return (
     <div className={styles.bar}>
       <div className={styles.barContent}>
@@ -44,12 +55,12 @@ const Player = () => {
                 </div>
                 <div className={styles.trackPlayAuthor}>
                   <a className={styles.trackPlayAuthorLink} href="http://">
-                    Ты та...
+                    {name}
                   </a>
                 </div>
                 <div className={styles.trackPlayAlbum}>
                   <a className={styles.trackPlayAlbumLink} href="http://">
-                    Баста
+                    {author}
                   </a>
                 </div>
               </div>
