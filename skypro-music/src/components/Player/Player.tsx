@@ -53,10 +53,8 @@ const Player = () => {
   const handleEnded = () => {
     if (currentTrackIndex < playlist.length - 1) {
       setCurrentTrackIndex(currentTrackIndex + 1);
-      setCurrentTrack(playlist[currentTrackIndex + 1]);
     } else {
       setCurrentTrackIndex(0);
-      setCurrentTrack(playlist[0]);
     }
   };
 
@@ -91,10 +89,8 @@ const Player = () => {
                 className={styles.playerBtnPrev}
                 onClick={() => {
                   if (currentTrackIndex > 0) {
-                    setCurrentTrackIndex(currentTrackIndex - 1);
                     setCurrentTrack(playlist[currentTrackIndex - 1]);
                   } else {
-                    setCurrentTrackIndex(playlist.length - 1);
                     setCurrentTrack(playlist[playlist.length - 1]);
                   }
                 }}
@@ -116,10 +112,8 @@ const Player = () => {
                 className={styles.playerBtnNext}
                 onClick={() => {
                   if (currentTrackIndex < playlist.length - 1) {
-                    setCurrentTrackIndex(currentTrackIndex + 1);
                     setCurrentTrack(playlist[currentTrackIndex + 1]);
                   } else {
-                    setCurrentTrackIndex(0);
                     setCurrentTrack(playlist[0]);
                   }
                 }}
