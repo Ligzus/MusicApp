@@ -13,6 +13,7 @@ const Player = () => {
   const [isLoop, setIsLoop] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const duration = audioRef.current?.duration || 0;
 
   useEffect(() => {
     if (playlist.length > 0 && currentTrack) {
@@ -23,16 +24,20 @@ const Player = () => {
     const audio = audioRef.current;
     if (audio && currentTrack) {
       audio.src = currentTrack.track_file;
-      audio.addEventListener("ended", handleEnded);
+
+      audio.loop = isLoop;
 
       audio.play();
       setIsPlaying(true);
-
-      return () => {
-        audio.removeEventListener("ended", handleEnded);
-      };
     }
   }, [currentTrack, playlist]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.loop = isLoop;
+    }
+  }, [isLoop]);
 
   const handlePlay = () => {
     const audio = audioRef.current;
@@ -55,24 +60,26 @@ const Player = () => {
   const handleEnded = () => {
     if (currentTrackIndex < playlist.length - 1) {
       setCurrentTrackIndex(currentTrackIndex + 1);
-      setCurrentTrack(playlist[currentTrackIndex])
+      setCurrentTrack(playlist[currentTrackIndex + 1]);
     } else {
       setCurrentTrackIndex(0);
-      setCurrentTrack(playlist[currentTrackIndex])
+      setCurrentTrack(playlist[0]);
     }
   };
 
   const handleLoop = () => {
     setIsLoop((prev) => !prev);
-    console.log(isLoop);
-  }
+  };
+
+  const notImplemented = () => {
+    alert("Еще не реализовано");
+  };
 
   if (!currentTrack) {
     return null;
   }
 
   const { name, author, track_file } = currentTrack;
-  const duration = audioRef.current?.duration || 0;
 
   return (
     <div className={styles.bar}>
@@ -84,6 +91,7 @@ const Player = () => {
           onTimeUpdate={(e) => {
             setCurrentTime(e.currentTarget.currentTime);
           }}
+          onEnded={handleEnded}
         ></audio>
         <ProgressBar
           max={duration}
@@ -131,12 +139,24 @@ const Player = () => {
                   <use xlinkHref="img/icon/sprite.svg#icon-next" />
                 </svg>
               </div>
-              <div onClick={handleLoop} className={`${styles.playerBtnRepeat} ${styles.btnIcon}`}>
-                <svg className={styles.playerBtnRepeatSvg}>
+              <div
+                onClick={handleLoop}
+                className={`${styles.playerBtnRepeat} ${styles.btnIcon}`}
+              >
+                <svg
+                  className={
+                    isLoop
+                      ? styles.playerBtnRepeatSvgActive
+                      : styles.playerBtnRepeatSvg
+                  }
+                >
                   <use xlinkHref="img/icon/sprite.svg#icon-repeat" />
                 </svg>
               </div>
-              <div className={`${styles.playerBtnShuffle} ${styles.btnIcon}`}>
+              <div
+                onClick={notImplemented}
+                className={`${styles.playerBtnShuffle} ${styles.btnIcon}`}
+              >
                 <svg className={styles.playerBtnShuffleSvg}>
                   <use xlinkHref="img/icon/sprite.svg#icon-shuffle" />
                 </svg>
