@@ -26,11 +26,14 @@ const Player = () => {
       audio.src = currentTrack.track_file;
       audio.addEventListener("ended", handleEnded);
 
+      audio.play();
+      setIsPlaying(true);
+
       return () => {
         audio.removeEventListener("ended", handleEnded);
       };
     }
-  }, [currentTrack]);
+  }, [currentTrack, playlist]);
 
   const handlePlay = () => {
     const audio = audioRef.current;
@@ -53,8 +56,10 @@ const Player = () => {
   const handleEnded = () => {
     if (currentTrackIndex < playlist.length - 1) {
       setCurrentTrackIndex(currentTrackIndex + 1);
+      setCurrentTrack(playlist[currentTrackIndex])
     } else {
       setCurrentTrackIndex(0);
+      setCurrentTrack(playlist[currentTrackIndex])
     }
   };
 
