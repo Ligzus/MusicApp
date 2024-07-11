@@ -271,3 +271,7 @@
   fill: transparent;
   stroke: #696969;
 }
+
+.audio {
+  display: none;
+}

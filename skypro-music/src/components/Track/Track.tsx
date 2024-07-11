@@ -1,3 +1,5 @@
+"use client";
+
 import { TrackType } from "@/types/tracks";
 import styles from "./Track.module.css";
 import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
@@ -8,7 +10,7 @@ type TrackProps = {
 
 const Track = ({ track }: TrackProps) => {
   const { name, author, album, duration_in_seconds } = track;
-  const {setCurrentTrack} = useCurrentTrack();
+  const { setCurrentTrack } = useCurrentTrack();
 
   const handleTrackClick = () => {
     setCurrentTrack(track);

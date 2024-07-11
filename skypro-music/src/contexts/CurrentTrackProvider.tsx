@@ -1,6 +1,5 @@
 "use client";
 
-import { TrackType } from "@/types/tracks";
 import {
   createContext,
   Dispatch,
@@ -9,10 +8,15 @@ import {
   useContext,
   useState,
 } from "react";
+import { TrackType } from "@/types/tracks";
 
 type CurrentTrackContextValue = {
   currentTrack: TrackType | null;
   setCurrentTrack: Dispatch<SetStateAction<TrackType | null>>;
+  playlist: TrackType[];
+  setPlaylist: Dispatch<SetStateAction<TrackType[]>>;
+  currentTrackIndex: number;
+  setCurrentTrackIndex: Dispatch<SetStateAction<number>>;
 };
 
 const CurrentTrackContext = createContext<CurrentTrackContextValue | undefined>(
@@ -25,9 +29,20 @@ type CurrentTrackProviderProps = {
 
 export function CurrentTrackProvider({ children }: CurrentTrackProviderProps) {
   const [currentTrack, setCurrentTrack] = useState<TrackType | null>(null);
+  const [playlist, setPlaylist] = useState<TrackType[]>([]);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
 
   return (
-    <CurrentTrackContext.Provider value={{ currentTrack, setCurrentTrack }}>
+    <CurrentTrackContext.Provider
+      value={{
+        currentTrack,
+        setCurrentTrack,
+        playlist,
+        setPlaylist,
+        currentTrackIndex,
+        setCurrentTrackIndex,
+      }}
+    >
       {children}
     </CurrentTrackContext.Provider>
   );
@@ -39,6 +54,5 @@ export function useCurrentTrack() {
   if (context === undefined) {
     throw new Error("useCurrentTrack должен использоваться внутри провайдера");
   }
-  
   return context;
 }
