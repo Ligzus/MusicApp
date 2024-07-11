@@ -10,6 +10,7 @@ const Player = () => {
   const { currentTrack, playlist, setCurrentTrack } = useCurrentTrack();
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isLoop, setIsLoop] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -60,6 +61,11 @@ const Player = () => {
       setCurrentTrack(playlist[currentTrackIndex])
     }
   };
+
+  const handleLoop = () => {
+    setIsLoop((prev) => !prev);
+    console.log(isLoop);
+  }
 
   if (!currentTrack) {
     return null;
@@ -125,7 +131,7 @@ const Player = () => {
                   <use xlinkHref="img/icon/sprite.svg#icon-next" />
                 </svg>
               </div>
-              <div className={`${styles.playerBtnRepeat} ${styles.btnIcon}`}>
+              <div onClick={handleLoop} className={`${styles.playerBtnRepeat} ${styles.btnIcon}`}>
                 <svg className={styles.playerBtnRepeatSvg}>
                   <use xlinkHref="img/icon/sprite.svg#icon-repeat" />
                 </svg>
