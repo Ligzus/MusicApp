@@ -18,9 +18,7 @@ const Player = () => {
       const index = playlist.findIndex((track) => track.id === currentTrack.id);
       setCurrentTrackIndex(index);
     }
-  }, [currentTrack, playlist]);
 
-  useEffect(() => {
     const audio = audioRef.current;
     if (audio && currentTrack) {
       audio.src = currentTrack.track_file;
