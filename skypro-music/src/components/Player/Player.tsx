@@ -7,18 +7,30 @@ import styles from "./Player.module.css";
 import ProgressBar from "./ProgressBar/ProgressBar";
 
 const Player = () => {
-  const { currentTrack, playlist, currentTrackIndex, setCurrentTrackIndex } =
-    useCurrentTrack();
+  const { currentTrack, playlist, setCurrentTrack } = useCurrentTrack();
+  const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  if (!currentTrack) {
-    return null;
-  }
+  useEffect(() => {
+    if (playlist.length > 0 && currentTrack) {
+      const index = playlist.findIndex((track) => track.id === currentTrack.id);
+      setCurrentTrackIndex(index);
+    }
+  }, [currentTrack, playlist]);
 
-  const { name, author, track_file } = currentTrack;
-  const duration = audioRef.current?.duration || 0;
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio && currentTrack) {
+      audio.src = currentTrack.track_file;
+      audio.addEventListener("ended", handleEnded);
+
+      return () => {
+        audio.removeEventListener("ended", handleEnded);
+      };
+    }
+  }, [currentTrack]);
 
   const handlePlay = () => {
     const audio = audioRef.current;
@@ -38,32 +50,22 @@ const Player = () => {
     }
   };
 
-  // const handleEnded = () => {
-  //   // Проверяем, не является ли текущий трек последним в плейлисте
-  //   if (currentTrackIndex < playlist.length - 1) {
-  //     // Переход к следующему треку
-  //     setCurrentTrackIndex(currentTrackIndex + 1);
-  //   } else {
-  //     // Или начинаем плейлист с начала
-  //     setCurrentTrackIndex(0);
-  //   }
-  // };
+  const handleEnded = () => {
+    if (currentTrackIndex < playlist.length - 1) {
+      setCurrentTrackIndex(currentTrackIndex + 1);
+      setCurrentTrack(playlist[currentTrackIndex + 1]);
+    } else {
+      setCurrentTrackIndex(0);
+      setCurrentTrack(playlist[0]);
+    }
+  };
 
-  // // Устанавливаем источник аудио и обработчик события `ended` при изменении трека
-  // useEffect(() => {
-  //   const audio = audioRef.current;
-  //   if (audio) {
-  //     audio.src = playlist[currentTrackIndex].track_file; // Предполагается, что плейлист содержит объекты с полем track_file
-  //     audio.addEventListener('ended', handleEnded);
+  if (!currentTrack) {
+    return null;
+  }
 
-  //     // Воспроизводим новый трек
-  //     audio.play();
-
-  //     return () => {
-  //       audio.removeEventListener('ended', handleEnded);
-  //     };
-  //   }
-  // }, [currentTrackIndex, playlist]);
+  const { name, author, track_file } = currentTrack;
+  const duration = audioRef.current?.duration || 0;
 
   return (
     <div className={styles.bar}>
@@ -71,7 +73,6 @@ const Player = () => {
         <audio
           src={track_file}
           className={styles.audio}
-          controls
           ref={audioRef}
           onTimeUpdate={(e) => {
             setCurrentTime(e.currentTarget.currentTime);
@@ -86,7 +87,18 @@ const Player = () => {
         <div className={styles.barPlayerBlock}>
           <div className={styles.barPlayer}>
             <div className={styles.playerControls}>
-              <div className={styles.playerBtnPrev}>
+              <div
+                className={styles.playerBtnPrev}
+                onClick={() => {
+                  if (currentTrackIndex > 0) {
+                    setCurrentTrackIndex(currentTrackIndex - 1);
+                    setCurrentTrack(playlist[currentTrackIndex - 1]);
+                  } else {
+                    setCurrentTrackIndex(playlist.length - 1);
+                    setCurrentTrack(playlist[playlist.length - 1]);
+                  }
+                }}
+              >
                 <svg className={styles.playerBtnPrevSvg}>
                   <use xlinkHref="img/icon/sprite.svg#icon-prev" />
                 </svg>
@@ -100,7 +112,18 @@ const Player = () => {
                   )}
                 </svg>
               </div>
-              <div className={styles.playerBtnNext}>
+              <div
+                className={styles.playerBtnNext}
+                onClick={() => {
+                  if (currentTrackIndex < playlist.length - 1) {
+                    setCurrentTrackIndex(currentTrackIndex + 1);
+                    setCurrentTrack(playlist[currentTrackIndex + 1]);
+                  } else {
+                    setCurrentTrackIndex(0);
+                    setCurrentTrack(playlist[0]);
+                  }
+                }}
+              >
                 <svg className={styles.playerBtnNextSvg}>
                   <use xlinkHref="img/icon/sprite.svg#icon-next" />
                 </svg>
@@ -124,12 +147,12 @@ const Player = () => {
                   </svg>
                 </div>
                 <div className={styles.trackPlayAuthor}>
-                  <a className={styles.trackPlayAuthorLink} href="http://">
+                  <a className={styles.trackPlayAuthorLink} href="#">
                     {name}
                   </a>
                 </div>
                 <div className={styles.trackPlayAlbum}>
-                  <a className={styles.trackPlayAlbumLink} href="http://">
+                  <a className={styles.trackPlayAlbumLink} href="#">
                     {author}
                   </a>
                 </div>
