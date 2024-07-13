@@ -3,6 +3,7 @@
 import { TrackType } from "@/types/tracks";
 import styles from "./Track.module.css";
 import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
+import { formatDuration } from "@/utils/timeFormat";
 
 type TrackProps = {
   track: TrackType;
@@ -14,12 +15,6 @@ const Track = ({ track }: TrackProps) => {
 
   const handleTrackClick = () => {
     setCurrentTrack(track);
-  };
-
-  const formatDuration = (seconds: number): string => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   };
 
   return (

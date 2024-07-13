@@ -59,3 +59,11 @@
   background-color: var(--progress-color);
   height: var(--progress-height);
 }
+
+.trakTimeBlock {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
