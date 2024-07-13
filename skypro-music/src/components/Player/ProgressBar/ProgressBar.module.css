@@ -62,8 +62,13 @@
 
 .trakTimeBlock {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   margin-bottom: 5px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.trakTimeBlock div {
+  width: 40px;
+  text-align: center;
 }

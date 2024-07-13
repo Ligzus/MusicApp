@@ -18,6 +18,7 @@ export default function ProgressBar({
     <>
       <div className={styles.trakTimeBlock}>
         <div>{formatDuration(value)}</div>
+        <span> / </span>
         <div>{formatDuration(max)}</div>
       </div>
       <input
