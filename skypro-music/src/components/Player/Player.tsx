@@ -1,25 +1,28 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
+// import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
 import VolumeSlider from "../VolumeSlider/VolumeSlider";
 import styles from "./Player.module.css";
 import ProgressBar from "./ProgressBar/ProgressBar";
+import { useAppSelector } from "@/hooks";
 
 const Player = () => {
-  const { currentTrack, playlist, setCurrentTrack } = useCurrentTrack();
-  const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
+  // const { currentTrack, playlist, setCurrentTrack } = useCurrentTrack();
+  // const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isLoop, setIsLoop] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const duration = audioRef.current?.duration || 0;
 
+  const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
+
   useEffect(() => {
-    if (playlist.length > 0 && currentTrack) {
-      const index = playlist.findIndex((track) => track.id === currentTrack.id);
-      setCurrentTrackIndex(index);
-    }
+    // if (playlist.length > 0 && currentTrack) {
+    //   const index = playlist.findIndex((track) => track.id === currentTrack.id);
+    //   setCurrentTrackIndex(index);
+    // }
 
     const audio = audioRef.current;
     if (audio && currentTrack) {
@@ -30,7 +33,7 @@ const Player = () => {
       audio.play();
       setIsPlaying(true);
     }
-  }, [currentTrack, playlist]);
+  }, [currentTrack]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -58,13 +61,13 @@ const Player = () => {
   };
 
   const handleEnded = () => {
-    if (currentTrackIndex < playlist.length - 1) {
-      setCurrentTrackIndex(currentTrackIndex + 1);
-      setCurrentTrack(playlist[currentTrackIndex + 1]);
-    } else {
-      setCurrentTrackIndex(0);
-      setCurrentTrack(playlist[0]);
-    }
+    // if (currentTrackIndex < playlist.length - 1) {
+    //   setCurrentTrackIndex(currentTrackIndex + 1);
+    //   setCurrentTrack(playlist[currentTrackIndex + 1]);
+    // } else {
+    //   setCurrentTrackIndex(0);
+    //   setCurrentTrack(playlist[0]);
+    // }
   };
 
   const handleLoop = () => {
@@ -104,13 +107,13 @@ const Player = () => {
             <div className={styles.playerControls}>
               <div
                 className={styles.playerBtnPrev}
-                onClick={() => {
-                  if (currentTrackIndex > 0) {
-                    setCurrentTrack(playlist[currentTrackIndex - 1]);
-                  } else {
-                    setCurrentTrack(playlist[playlist.length - 1]);
-                  }
-                }}
+                // onClick={() => {
+                //   if (currentTrackIndex > 0) {
+                //     setCurrentTrack(playlist[currentTrackIndex - 1]);
+                //   } else {
+                //     setCurrentTrack(playlist[playlist.length - 1]);
+                //   }
+                // }}
               >
                 <svg className={styles.playerBtnPrevSvg}>
                   <use xlinkHref="img/icon/sprite.svg#icon-prev" />
@@ -128,11 +131,11 @@ const Player = () => {
               <div
                 className={styles.playerBtnNext}
                 onClick={() => {
-                  if (currentTrackIndex < playlist.length - 1) {
-                    setCurrentTrack(playlist[currentTrackIndex + 1]);
-                  } else {
-                    setCurrentTrack(playlist[0]);
-                  }
+                  // if (currentTrackIndex < playlist.length - 1) {
+                  //   setCurrentTrack(playlist[currentTrackIndex + 1]);
+                  // } else {
+                  //   setCurrentTrack(playlist[0]);
+                  // }
                 }}
               >
                 <svg className={styles.playerBtnNextSvg}>

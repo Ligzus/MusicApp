@@ -2,20 +2,27 @@
 
 import { TrackType } from "@/types/tracks";
 import styles from "./Track.module.css";
-import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
+// import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
 import { formatDuration } from "@/utils/timeFormat";
+import { useAppDispatch } from "@/hooks";
+import { setCurrentTrack } from "@/store/features/playlistSlice";
 
 type TrackProps = {
   track: TrackType;
+  playlist: TrackType[];
 };
 
-const Track = ({ track }: TrackProps) => {
-  const { name, author, album, duration_in_seconds } = track;
-  const { setCurrentTrack } = useCurrentTrack();
+const Track = ({ track, playlist }: TrackProps) => {
+  // const { setCurrentTrack } = useCurrentTrack();
+
+  const dispatch = useAppDispatch();
 
   const handleTrackClick = () => {
-    setCurrentTrack(track);
+    dispatch(setCurrentTrack({ track, playlist }));
+    console.log(track);
   };
+
+  const { name, author, album, duration_in_seconds } = track;
 
   return (
     <div onClick={handleTrackClick} className={styles.playlistItem}>

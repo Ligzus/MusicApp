@@ -9,14 +9,14 @@ export default function Home() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <CurrentTrackProvider>
+        {/* <CurrentTrackProvider> */}
           <main className={styles.main}>
             <Nav />
             <CenterBlock />
             <Sidebar />
           </main>
           <Player />
-        </CurrentTrackProvider>
+        {/* </CurrentTrackProvider> */}
         <footer className="footer" />
       </div>
     </div>
