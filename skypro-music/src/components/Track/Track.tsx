@@ -4,25 +4,27 @@ import { TrackType } from "@/types/tracks";
 import styles from "./Track.module.css";
 // import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
 import { formatDuration } from "@/utils/timeFormat";
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { setCurrentTrack } from "@/store/features/playlistSlice";
 
 type TrackProps = {
   track: TrackType;
-  playlist: TrackType[];
+  trackData: TrackType[];
 };
 
-const Track = ({ track, playlist }: TrackProps) => {
+const Track = ({ track, trackData }: TrackProps) => {
   // const { setCurrentTrack } = useCurrentTrack();
-
   const dispatch = useAppDispatch();
 
   const handleTrackClick = () => {
-    dispatch(setCurrentTrack({ track, playlist }));
+    dispatch(setCurrentTrack({ track, trackData }));
     console.log(track);
   };
 
-  const { name, author, album, duration_in_seconds } = track;
+  const { name, author, album, duration_in_seconds, id } = track;
+
+  const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
+  const isPlaying = currentTrack ? currentTrack.id === id : false;
 
   return (
     <div onClick={handleTrackClick} className={styles.playlistItem}>

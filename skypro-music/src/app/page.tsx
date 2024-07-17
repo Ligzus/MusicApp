@@ -10,12 +10,12 @@ export default function Home() {
     <div className={styles.wrapper}>
       <div className={styles.container}>
         {/* <CurrentTrackProvider> */}
-          <main className={styles.main}>
-            <Nav />
-            <CenterBlock />
-            <Sidebar />
-          </main>
-          <Player />
+        <main className={styles.main}>
+          <Nav />
+          <CenterBlock />
+          <Sidebar />
+        </main>
+        <Player />
         {/* </CurrentTrackProvider> */}
         <footer className="footer" />
       </div>
