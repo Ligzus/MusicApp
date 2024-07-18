@@ -1,37 +1,35 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-// import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
 import VolumeSlider from "../VolumeSlider/VolumeSlider";
 import styles from "./Player.module.css";
 import ProgressBar from "./ProgressBar/ProgressBar";
-import { useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { setIsPlaying, setIsShuffle, setNextTrack, setPrevTrack } from "@/store/features/playlistSlice";
 
 const Player = () => {
-  // const { currentTrack, playlist, setCurrentTrack } = useCurrentTrack();
-  // const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isLoop, setIsLoop] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const duration = audioRef.current?.duration || 0;
 
+  const dispatch = useAppDispatch();
+
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
+  const shuffled = useAppSelector((state) => state.playlist.isShuffled);
+  const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
 
   useEffect(() => {
-    // if (playlist.length > 0 && currentTrack) {
-    //   const index = playlist.findIndex((track) => track.id === currentTrack.id);
-    //   setCurrentTrackIndex(index);
-    // }
 
     const audio = audioRef.current;
+    
     if (audio && currentTrack) {
       audio.src = currentTrack.track_file;
 
       audio.loop = isLoop;
 
       audio.play();
-      setIsPlaying(true);
+      dispatch(setIsPlaying(true))
     }
   }, [currentTrack]);
 
@@ -51,7 +49,13 @@ const Player = () => {
         audio.play();
       }
     }
-    setIsPlaying((prev) => !prev);
+
+    if (isPlaying) {
+      dispatch(setIsPlaying(false))
+    } else {
+      dispatch(setIsPlaying(true))
+    }
+    
   };
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,22 +64,16 @@ const Player = () => {
     }
   };
 
-  const handleEnded = () => {
-    // if (currentTrackIndex < playlist.length - 1) {
-    //   setCurrentTrackIndex(currentTrackIndex + 1);
-    //   setCurrentTrack(playlist[currentTrackIndex + 1]);
-    // } else {
-    //   setCurrentTrackIndex(0);
-    //   setCurrentTrack(playlist[0]);
-    // }
+  const handleNextTrack = () => {
+    dispatch(setNextTrack());
   };
+
+  const handlePrevTrack = () => {
+    dispatch(setPrevTrack());
+  }
 
   const handleLoop = () => {
     setIsLoop((prev) => !prev);
-  };
-
-  const notImplemented = () => {
-    alert("Еще не реализовано");
   };
 
   if (!currentTrack) {
@@ -94,7 +92,7 @@ const Player = () => {
           onTimeUpdate={(e) => {
             setCurrentTime(e.currentTarget.currentTime);
           }}
-          onEnded={handleEnded}
+          onEnded={handleNextTrack}
         ></audio>
         <ProgressBar
           max={duration}
@@ -107,13 +105,9 @@ const Player = () => {
             <div className={styles.playerControls}>
               <div
                 className={styles.playerBtnPrev}
-                // onClick={() => {
-                //   if (currentTrackIndex > 0) {
-                //     setCurrentTrack(playlist[currentTrackIndex - 1]);
-                //   } else {
-                //     setCurrentTrack(playlist[playlist.length - 1]);
-                //   }
-                // }}
+                onClick={() => {
+                  handlePrevTrack()
+                }}
               >
                 <svg className={styles.playerBtnPrevSvg}>
                   <use xlinkHref="img/icon/sprite.svg#icon-prev" />
@@ -131,11 +125,7 @@ const Player = () => {
               <div
                 className={styles.playerBtnNext}
                 onClick={() => {
-                  // if (currentTrackIndex < playlist.length - 1) {
-                  //   setCurrentTrack(playlist[currentTrackIndex + 1]);
-                  // } else {
-                  //   setCurrentTrack(playlist[0]);
-                  // }
+                  handleNextTrack()
                 }}
               >
                 <svg className={styles.playerBtnNextSvg}>
@@ -157,10 +147,20 @@ const Player = () => {
                 </svg>
               </div>
               <div
-                onClick={notImplemented}
+                onClick={() => {
+                  if (shuffled) {
+                    dispatch(setIsShuffle(false))
+                  } else {
+                    dispatch(setIsShuffle(true))
+                  }
+                }}
                 className={`${styles.playerBtnShuffle} ${styles.btnIcon}`}
               >
-                <svg className={styles.playerBtnShuffleSvg}>
+                <svg className={
+                  shuffled
+                    ? styles.playerBtnRepeatSvgActive
+                    : styles.playerBtnShuffleSvg
+                }>
                   <use xlinkHref="img/icon/sprite.svg#icon-shuffle" />
                 </svg>
               </div>

@@ -6,6 +6,7 @@ type PlaylistStateType = {
   playlist: TrackType[];
   shuffledPlayList: TrackType[];
   isShuffled: boolean;
+  isPlaying: boolean;
 };
 
 const initialState: PlaylistStateType = {
@@ -13,6 +14,7 @@ const initialState: PlaylistStateType = {
   playlist: [],
   shuffledPlayList: [],
   isShuffled: false,
+  isPlaying: false
 };
 
 const playlistSlice = createSlice({
@@ -61,11 +63,15 @@ const playlistSlice = createSlice({
     },
 
     setIsShuffle: (state, action: PayloadAction<boolean>) => {
-      state.isShuffled === action.payload;
+      state.isShuffled = action.payload;
     },
+
+    setIsPlaying: (state, action: PayloadAction<boolean>) => {
+        state.isPlaying = action.payload;
+    }
   },
 });
 
-export const { setCurrentTrack, setNextTrack, setPrevTrack, setIsShuffle } =
+export const { setCurrentTrack, setNextTrack, setPrevTrack, setIsShuffle, setIsPlaying } =
   playlistSlice.actions;
 export const playlistReducer = playlistSlice.reducer;
