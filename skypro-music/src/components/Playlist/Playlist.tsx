@@ -1,10 +1,6 @@
-"use client";
-
 import { TrackType } from "@/types/tracks";
 import styles from "./Playlist.module.css";
 import Track from "../Track/Track";
-import { useCurrentTrack } from "@/contexts/CurrentTrackProvider";
-import { useEffect } from "react";
 
 type PlaylistProps = {
   tracks: TrackType[];
@@ -12,14 +8,6 @@ type PlaylistProps = {
 };
 
 const Playlist = ({ tracks, error }: PlaylistProps) => {
-  const { setPlaylist } = useCurrentTrack();
-
-  useEffect(() => {
-    if (tracks) {
-      setPlaylist(tracks); // Устанавливаем плейлист в контексте после рендера
-    }
-  }, [tracks, setPlaylist]);
-
   return (
     <div className={styles.centerblockContent}>
       <div className={styles.contentTitle}>
@@ -36,7 +24,9 @@ const Playlist = ({ tracks, error }: PlaylistProps) => {
         {error ? (
           <p>{error}</p>
         ) : (
-          tracks.map((track) => <Track key={track.id} track={track} />)
+          tracks.map((track) => (
+            <Track key={track.id} track={track} trackData={tracks} />
+          ))
         )}
       </div>
     </div>
