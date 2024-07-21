@@ -4,17 +4,20 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import { useState } from "react";
 import { useAppDispatch } from "@/hooks";
-import { login, register } from "@/store/features/userSlice";
+import { login } from "@/store/features/userSlice";
+import { useRouter } from "next/navigation";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(login({ email, password }));
+    router.push("/");
   };
 
   return (

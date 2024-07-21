@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import { useState } from "react";
 import { useAppDispatch } from "@/hooks";
 import { register } from "@/store/features/userSlice";
+import { useRouter } from "next/navigation";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -11,10 +12,12 @@ export default function SignUp() {
   const [username, setUsername] = useState("");
 
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(register({ email, password, username }));
+    router.push("/");
   };
 
   return (
