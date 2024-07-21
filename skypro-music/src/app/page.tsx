@@ -3,7 +3,6 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import Nav from "@/components/Nav/Nav";
 import CenterBlock from "@/components/CenterBlock/CenterBlock";
 import Player from "@/components/Player/Player";
-import { CurrentTrackProvider } from "@/contexts/CurrentTrackProvider";
 
 export default function Home() {
   return (

@@ -1,8 +1,19 @@
+import { fetchFavoriteTracks } from "@/api/tracks";
 import { TrackType } from "@/types/tracks";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+export const getFavoriteTracks = createAsyncThunk(
+  "playlist/getFavoriteTracks",
+  async ({ access, refresh }: any) => {
+    const favoriteTracks = await fetchFavoriteTracks(access);
+
+    return favoriteTracks;
+  },
+);
 
 type PlaylistStateType = {
   currentTrack: null | TrackType;
+  likedTracks: TrackType[];
   playlist: TrackType[];
   shuffledPlayList: TrackType[];
   isShuffled: boolean;
@@ -11,10 +22,11 @@ type PlaylistStateType = {
 
 const initialState: PlaylistStateType = {
   currentTrack: null,
+  likedTracks: [],
   playlist: [],
   shuffledPlayList: [],
   isShuffled: false,
-  isPlaying: false
+  isPlaying: false,
 };
 
 const playlistSlice = createSlice({
@@ -67,11 +79,35 @@ const playlistSlice = createSlice({
     },
 
     setIsPlaying: (state, action: PayloadAction<boolean>) => {
-        state.isPlaying = action.payload;
-    }
+      state.isPlaying = action.payload;
+    },
+
+    setDislikeTrack: (state, action: PayloadAction<TrackType>) => {
+      const dislikedTrackId = action.payload.id;
+      state.likedTracks = state.likedTracks.filter(
+        (track) => track.id !== dislikedTrackId,
+      );
+    },
+
+    setLikeTrack: (state, action: PayloadAction<TrackType>) => {
+      const likedTrack = action.payload;
+      state.likedTracks.push(likedTrack);
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getFavoriteTracks.fulfilled, (state, action) => {
+      state.likedTracks = action.payload;
+    });
   },
 });
 
-export const { setCurrentTrack, setNextTrack, setPrevTrack, setIsShuffle, setIsPlaying } =
-  playlistSlice.actions;
+export const {
+  setCurrentTrack,
+  setNextTrack,
+  setPrevTrack,
+  setIsShuffle,
+  setIsPlaying,
+  setDislikeTrack,
+  setLikeTrack,
+} = playlistSlice.actions;
 export const playlistReducer = playlistSlice.reducer;
