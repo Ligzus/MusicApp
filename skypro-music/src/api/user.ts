@@ -1,9 +1,7 @@
-import { use } from "react";
-
 const USER_API_URL = "https://skypro-music-api.skyeng.tech/user";
 
 // Зарегистрироваться
-export async function signUp(
+export async function registerUser(
   email: string,
   password: string,
   username: string,
@@ -20,27 +18,35 @@ export async function signUp(
     },
   });
 
+  if (!res.ok) {
+    throw new Error("Ошибка регистрации");
+  }
+
   return res.json();
 }
 
 // Войти
-export async function login() {
+export async function loginUser(email: string, password: string) {
   const res = await fetch(USER_API_URL + "/login/", {
     method: "POST",
     body: JSON.stringify({
-      email: "",
-      password: "",
+      email,
+      password,
     }),
     headers: {
       "content-type": "application/json",
     },
   });
 
+  if (!res.ok) {
+    throw new Error("Ошибка входа");
+  }
+
   return res.json();
 }
 
-//Обновить токен
-export async function getNewToken(refresh: string) {
+// Обновить токен
+export async function refreshToken(refresh: string) {
   const res = await fetch(USER_API_URL + "/token/refresh/", {
     method: "POST",
     body: JSON.stringify({
@@ -50,6 +56,10 @@ export async function getNewToken(refresh: string) {
       "content-type": "application/json",
     },
   });
+
+  if (!res.ok) {
+    throw new Error("Ошибка обновления токена");
+  }
 
   return res.json();
 }
@@ -66,6 +76,10 @@ export async function getToken(email: string, password: string) {
       "content-type": "application/json",
     },
   });
+
+  if (!res.ok) {
+    throw new Error("Ошибка получения токена");
+  }
 
   return res.json();
 }

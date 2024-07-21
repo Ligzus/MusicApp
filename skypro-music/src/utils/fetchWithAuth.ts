@@ -1,4 +1,4 @@
-import { getNewToken } from "@/api/user";
+import { refreshToken } from "@/api/user";
 
 export async function fetchWithAuth(
   url: string,
@@ -10,7 +10,7 @@ export async function fetchWithAuth(
 
   // Проверка на истечение Access токена (401 Unauthorized)
   if (res.status === 401) {
-    const newAccessToken = await getNewToken(refresh); // Получение нового Access токена
+    const newAccessToken = await refreshToken(refresh); // Получение нового Access токена
 
     // Повторный запрос с новым токеном
     options.headers = {
