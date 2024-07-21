@@ -1,6 +1,22 @@
-import styles from "./page.module.css";
+"use client";
 
-export default function signup() {
+import styles from "./page.module.css";
+import { useState } from "react";
+import { useAppDispatch } from "@/hooks";
+import { register } from "@/store/features/userSlice";
+
+export default function SignUp() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(register({ email, password, username }));
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.containerSignup}>
@@ -12,25 +28,31 @@ export default function signup() {
               </div>
             </a>
             <input
+              className={`${styles.modalInput} ${styles.passwordDouble}`}
+              type="text"
+              name="username"
+              placeholder="Имя пользователя"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
               className={`${styles.modalInput} ${styles.login}`}
               type="text"
-              name="login"
+              name="email"
               placeholder="Почта"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               className={`${styles.modalInput} ${styles.passwordFirst}`}
               type="password"
               name="password"
               placeholder="Пароль"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <input
-              className={`${styles.modalInput} ${styles.passwordDouble}`}
-              type="password"
-              name="password"
-              placeholder="Повторите пароль"
-            />
-            <button className={styles.modalBtnSignupEnt}>
-              <a href="../index.html">Зарегистрироваться</a>
+            <button className={styles.modalBtnSignupEnt} onClick={handleSubmit}>
+              <a>Зарегистрироваться</a>
             </button>
           </form>
         </div>

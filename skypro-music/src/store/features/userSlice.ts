@@ -17,6 +17,7 @@ export const register = createAsyncThunk(
       userInfo.password,
       userInfo.username,
     );
+
     return response;
   },
 );
@@ -34,7 +35,6 @@ type UserStateType = {
   username: string;
   access: string | null;
   refresh: string | null;
-  status: "idle" | "loading" | "failed";
 };
 
 const initialState: UserStateType = {
@@ -42,7 +42,6 @@ const initialState: UserStateType = {
   username: "",
   access: null,
   refresh: null,
-  status: "idle",
 };
 
 const userSlice = createSlice({
@@ -58,39 +57,18 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(login.pending, (state) => {
-        state.status = "loading";
-      })
       .addCase(login.fulfilled, (state, action) => {
-        state.status = "idle";
         state.email = action.payload.email;
         state.username = action.payload.username;
         state.access = action.payload.access;
         state.refresh = action.payload.refresh;
       })
-      .addCase(login.rejected, (state) => {
-        state.status = "failed";
-      })
-      .addCase(register.pending, (state) => {
-        state.status = "loading";
-      })
       .addCase(register.fulfilled, (state, action) => {
-        state.status = "idle";
         state.email = action.payload.email;
         state.username = action.payload.username;
       })
-      .addCase(register.rejected, (state) => {
-        state.status = "failed";
-      })
-      .addCase(refreshAccessToken.pending, (state) => {
-        state.status = "loading";
-      })
       .addCase(refreshAccessToken.fulfilled, (state, action) => {
-        state.status = "idle";
         state.access = action.payload.access;
-      })
-      .addCase(refreshAccessToken.rejected, (state) => {
-        state.status = "failed";
       });
   },
 });
