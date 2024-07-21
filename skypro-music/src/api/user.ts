@@ -1,5 +1,3 @@
-import { traceGlobals } from "next/dist/trace/shared";
-
 const USER_API_URL = "https://webdev-music-003b5b991590.herokuapp.com/user";
 
 // Зарегистрироваться

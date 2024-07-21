@@ -10,14 +10,17 @@ import { useRouter } from "next/navigation";
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
-    router.push("/");
+    try {
+      await dispatch(login({ email, password })).unwrap();
+      router.push("/");
+    } catch (error) {
+      console.error("Ошибка авторизации:", error);
+    }
   };
 
   return (

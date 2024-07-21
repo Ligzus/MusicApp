@@ -10,14 +10,17 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(register({ email, password, username }));
-    router.push("/");
+    try {
+      await dispatch(register({ email, password, username })).unwrap();
+      router.push("/");
+    } catch (error) {
+      console.error("Ошибка регистрации:", error);
+    }
   };
 
   return (
