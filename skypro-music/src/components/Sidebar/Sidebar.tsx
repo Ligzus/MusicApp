@@ -1,12 +1,17 @@
+'use client'
+
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
 import Link from "next/link";
+import { useAppSelector } from "@/hooks";
 
 const Sidebar = () => {
+  const user = useAppSelector(store => store.user);
+
   return (
     <div className={styles.mainSidebar}>
       <div className={styles.sidebarPersonal}>
-        <p className={styles.sidebarPersonalName}>Sergey.Ivanov</p>
+        <p className={styles.sidebarPersonalName}>{user.username}</p>
         <Link href="/signin/" className={styles.sidebarIcon}>
           <svg>
             <use xlinkHref="img/icon/sprite.svg#logout" />

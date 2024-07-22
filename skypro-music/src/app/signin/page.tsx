@@ -3,7 +3,7 @@
 import Link from "next/link";
 import styles from "./page.module.css";
 import { useState } from "react";
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { login } from "@/store/features/userSlice";
 import { useRouter } from "next/navigation";
 
@@ -13,11 +13,14 @@ export default function SignIn() {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  const token = useAppSelector(state => state.user.refresh);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await dispatch(login({ email, password })).unwrap();
       router.push("/");
+      console.log(token);
     } catch (error) {
       console.error("Ошибка авторизации:", error);
     }

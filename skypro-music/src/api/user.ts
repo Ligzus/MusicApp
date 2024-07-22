@@ -46,7 +46,9 @@ export async function loginUser(email: string, password: string) {
 }
 
 // Обновить токен
-export async function refreshToken(refresh: string) {
+export async function refreshToken(
+  refresh: string | null
+) {
   const res = await fetch(USER_API_URL + "/token/refresh/", {
     method: "POST",
     body: JSON.stringify({

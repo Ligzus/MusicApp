@@ -22,7 +22,7 @@ export async function likeTrack({
   refresh: string;
 }) {
   const res = await fetchWithAuth(
-    API_URL + `/track/${trackId}/favorite/`,
+    API_URL + `/catalog/track/${trackId}/favorite/`,
     {
       method: "POST",
       headers: {

@@ -18,10 +18,9 @@ export const useAppStore: () => AppStore = useStore;
 const useLikeTrack = (track: TrackType) => {
   const dispatch = useAppDispatch();
 
-  // const tokens = useAppSelector(state => state.auth.tokens);
   const tokens = {
-    access: "",
-    refresh: "",
+    access: useAppSelector(state => state.user.access),
+    refresh: useAppSelector(state => state.user.refresh),
   };
 
   const likeTracks = useAppSelector((state) => state.playlist.likedTracks);

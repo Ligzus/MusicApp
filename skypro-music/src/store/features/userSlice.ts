@@ -21,7 +21,7 @@ export const register = createAsyncThunk(
 
 export const refreshAccessToken = createAsyncThunk(
   "user/refreshToken",
-  async (refresh: string) => {
+  async (refresh: string | null) => {
     const response = await refreshToken(refresh);
     return response;
   },

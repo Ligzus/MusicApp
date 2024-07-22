@@ -1,16 +1,17 @@
-import { refreshToken } from "@/api/user";
+import { useAppSelector } from "@/hooks";
+import { refreshAccessToken } from "@/store/features/userSlice";
 
 export async function fetchWithAuth(
   url: string,
   options: RequestInit,
-  refresh: string,
+  refresh: string | null,
 ) {
   // Выполнение первоначального запроса
   let res = await fetch(url, options);
 
   // Проверка на истечение Access токена (401 Unauthorized)
   if (res.status === 401) {
-    const newAccessToken = await refreshToken(refresh); // Получение нового Access токена
+    const newAccessToken = await refreshAccessToken(refresh); // Получение нового Access токена
 
     // Повторный запрос с новым токеном
     options.headers = {
@@ -22,7 +23,7 @@ export async function fetchWithAuth(
 
   // Проверка успешности запроса
   if (!res.ok) {
-    throw new Error(res.statusText); // Выброс ошибки при неудачном запросе
+    console.log(res.statusText); // Выброс ошибки при неудачном запросе
   }
 
   return res; // Возврат ответа
