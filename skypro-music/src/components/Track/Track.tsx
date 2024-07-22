@@ -18,10 +18,10 @@ const Track = ({ track, trackData }: TrackProps) => {
     dispatch(setCurrentTrack({ track, trackData }));
   };
 
-  const { name, author, album, duration_in_seconds, id } = track;
+  const { name, author, album, duration_in_seconds, _id } = track;
 
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
-  const isPlayingTrack = currentTrack ? currentTrack.id === id : false;
+  const isPlayingTrack = currentTrack ? currentTrack._id === _id : false;
 
   const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
 

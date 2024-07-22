@@ -49,7 +49,7 @@ const playlistSlice = createSlice({
         ? state.shuffledPlayList
         : state.playlist;
       const currentTrackIndex = currentPlaylist.findIndex(
-        (track) => track.id === state.currentTrack?.id,
+        (track) => track._id === state.currentTrack?._id,
       );
 
       const nextTrack = currentPlaylist[currentTrackIndex + 1];
@@ -64,7 +64,7 @@ const playlistSlice = createSlice({
         ? state.shuffledPlayList
         : state.playlist;
       const currentTrackIndex = currentPlaylist.findIndex(
-        (track) => track.id === state.currentTrack?.id,
+        (track) => track._id === state.currentTrack?._id,
       );
 
       const nextTrack = currentPlaylist[currentTrackIndex - 1];
@@ -83,9 +83,9 @@ const playlistSlice = createSlice({
     },
 
     setDislikeTrack: (state, action: PayloadAction<TrackType>) => {
-      const dislikedTrackId = action.payload.id;
+      const dislikedTrackId = action.payload._id;
       state.likedTracks = state.likedTracks.filter(
-        (track) => track.id !== dislikedTrackId,
+        (track) => track._id !== dislikedTrackId,
       );
     },
 

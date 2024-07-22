@@ -24,7 +24,7 @@ const useLikeTrack = (track: TrackType) => {
   };
 
   const likeTracks = useAppSelector((state) => state.playlist.likedTracks);
-  const isLiked = !!likeTracks.find((t) => t.id === track.id);
+  const isLiked = !!likeTracks.find((t) => t._id === track._id);
 
   const handleLikeTrack = async () => {
     if (!tokens.access || !tokens.refresh) {
@@ -35,7 +35,7 @@ const useLikeTrack = (track: TrackType) => {
 
     try {
       await action({
-        trackId: track.id,
+        trackId: track._id,
         access: tokens.access,
         refresh: tokens.refresh,
       });
