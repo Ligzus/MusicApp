@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
 import { useEffect, useRef, useState } from "react";
 import VolumeSlider from "../VolumeSlider/VolumeSlider";
 import styles from "./Player.module.css";
 import ProgressBar from "./ProgressBar/ProgressBar";
+import useLikeTrack from "@/hooks";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   setIsPlaying,
@@ -23,6 +24,9 @@ const Player = () => {
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
   const shuffled = useAppSelector((state) => state.playlist.isShuffled);
   const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
+  
+
+  const { handleLikeTrack, isLiked } = useLikeTrack(currentTrack);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -35,7 +39,7 @@ const Player = () => {
       audio.play();
       dispatch(setIsPlaying(true));
     }
-  }, [currentTrack]);
+  }, [currentTrack, isLoop, dispatch]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -190,8 +194,14 @@ const Player = () => {
               </div>
               <div className={styles.trackPlayLikeDis}>
                 <div className={`${styles.trackPlayLike} ${styles.btnIcon}`}>
-                  <svg className={styles.trackPlayLikeSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                  <svg onClick={handleLikeTrack} className={styles.trackPlayLikeSvg}>
+                    <use
+                      xlinkHref={
+                        isLiked
+                          ? "img/icon/sprite.svg#icon-liked"
+                          : "img/icon/sprite.svg#icon-like"
+                      }
+                    />
                   </svg>
                 </div>
                 <div className={`${styles.trackPlayDislike} ${styles.btnIcon}`}>

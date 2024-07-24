@@ -19,7 +19,7 @@ export async function registerUser(
   });
 
   if (!res.ok) {
-    console.log("Ошибка регистрации");
+    alert("Ошибка регистрации, проверьте фармат email и надежность пароля");
   }
 
   return res.json();
@@ -39,7 +39,7 @@ export async function loginUser(email: string, password: string) {
   });
 
   if (!res.ok) {
-    throw new Error("Ошибка входа");
+    alert("Такого пользователя нет");
   }
 
   return res.json();

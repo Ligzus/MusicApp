@@ -8,25 +8,24 @@ import { AppDispatch, AppStore } from "./store/store";
 import { RootState } from "@/store/store";
 import { dislikeTrack, likeTrack } from "./api/tracks";
 import { setDislikeTrack, setLikeTrack } from "./store/features/playlistSlice";
-import { TrackType } from "./types/tracks";
 
 // Хуки useAppDispatch, useAppSelector и useAppStore позволяют использовать функции useDispatch, useSelector и useStore из библиотеки react-redux с типизацией.
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useAppStore: () => AppStore = useStore;
 
-const useLikeTrack = (track: TrackType) => {
+const useLikeTrack = (track: any) => {
   const dispatch = useAppDispatch();
-
   const tokens = {
     access: useAppSelector(state => state.user.access),
     refresh: useAppSelector(state => state.user.refresh),
   };
 
   const likeTracks = useAppSelector((state) => state.playlist.likedTracks);
-  const isLiked = !!likeTracks.find((t) => t._id === track._id);
+  const isLiked = Array.isArray(likeTracks) && !!likeTracks.find((t) => t._id === track._id);
 
-  const handleLikeTrack = async () => {
+  const handleLikeTrack = async (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (!tokens.access || !tokens.refresh) {
       return alert("Вы не авторизованы");
     }

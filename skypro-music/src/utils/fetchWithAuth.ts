@@ -1,4 +1,3 @@
-import { useAppSelector } from "@/hooks";
 import { refreshAccessToken } from "@/store/features/userSlice";
 
 export async function fetchWithAuth(

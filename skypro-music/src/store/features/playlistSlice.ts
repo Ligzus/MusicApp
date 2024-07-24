@@ -5,9 +5,8 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 export const getFavoriteTracks = createAsyncThunk(
   "playlist/getFavoriteTracks",
   async ({ access, refresh }: any) => {
-    const favoriteTracks = await fetchFavoriteTracks(access);
-
-    return favoriteTracks;
+    const favoriteTracks = await fetchFavoriteTracks({ access, refresh });
+    return favoriteTracks.data;
   },
 );
 
