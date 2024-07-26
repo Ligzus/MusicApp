@@ -204,11 +204,6 @@ const Player = () => {
                     />
                   </svg>
                 </div>
-                <div className={`${styles.trackPlayDislike} ${styles.btnIcon}`}>
-                  <svg className={styles.trackPlayDislikeSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-dislike" />
-                  </svg>
-                </div>
               </div>
             </div>
           </div>

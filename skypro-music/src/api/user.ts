@@ -19,7 +19,8 @@ export async function registerUser(
   });
 
   if (!res.ok) {
-    alert("Ошибка регистрации, проверьте фармат email и надежность пароля");
+    const errorData = await res.json();
+    throw new Error(errorData.message || "Ошибка регистрации, проверьте формат email и надежность пароля");
   }
 
   return res.json();
@@ -39,7 +40,8 @@ export async function loginUser(email: string, password: string) {
   });
 
   if (!res.ok) {
-    alert("Такого пользователя нет");
+    const errorData = await res.json();
+    throw new Error(errorData.message || "Такого пользователя нет");
   }
 
   return res.json();

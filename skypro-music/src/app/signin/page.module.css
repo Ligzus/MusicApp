@@ -38,7 +38,7 @@
 
 .modalFormLogin {
   width: 366px;
-  height: 439px;
+  height: auto;
   background-color: #ffffff;
   border-radius: 12px;
   display: -webkit-box;
@@ -199,4 +199,12 @@
 
 .login {
   margin-bottom: 30px;
+}
+
+.errorMessage{
+  margin-top: 30px;
+  margin-bottom: -30px;
+  color: #271a58;
+  font-size: 12px;
+  text-align: center;
 }
