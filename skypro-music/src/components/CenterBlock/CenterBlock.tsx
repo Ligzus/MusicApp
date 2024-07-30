@@ -10,7 +10,8 @@ const CenterBlock = async () => {
   let error: string = "";
 
   try {
-    tracks = await getTracks();
+    const tracksData = await getTracks();
+    tracks = tracksData.data;
   } catch (err: unknown) {
     error =
       err instanceof Error

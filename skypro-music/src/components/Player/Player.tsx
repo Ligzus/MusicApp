@@ -1,11 +1,17 @@
-"use client";
+'use client';
 
 import { useEffect, useRef, useState } from "react";
 import VolumeSlider from "../VolumeSlider/VolumeSlider";
 import styles from "./Player.module.css";
 import ProgressBar from "./ProgressBar/ProgressBar";
+import useLikeTrack from "@/hooks";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { setIsPlaying, setIsShuffle, setNextTrack, setPrevTrack } from "@/store/features/playlistSlice";
+import {
+  setIsPlaying,
+  setIsShuffle,
+  setNextTrack,
+  setPrevTrack,
+} from "@/store/features/playlistSlice";
 
 const Player = () => {
   const [isLoop, setIsLoop] = useState<boolean>(false);
@@ -18,20 +24,22 @@ const Player = () => {
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
   const shuffled = useAppSelector((state) => state.playlist.isShuffled);
   const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
+  
+
+  const { handleLikeTrack, isLiked } = useLikeTrack(currentTrack);
 
   useEffect(() => {
-
     const audio = audioRef.current;
-    
+
     if (audio && currentTrack) {
       audio.src = currentTrack.track_file;
 
       audio.loop = isLoop;
 
       audio.play();
-      dispatch(setIsPlaying(true))
+      dispatch(setIsPlaying(true));
     }
-  }, [currentTrack]);
+  }, [currentTrack, isLoop, dispatch]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -51,11 +59,10 @@ const Player = () => {
     }
 
     if (isPlaying) {
-      dispatch(setIsPlaying(false))
+      dispatch(setIsPlaying(false));
     } else {
-      dispatch(setIsPlaying(true))
+      dispatch(setIsPlaying(true));
     }
-    
   };
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +77,7 @@ const Player = () => {
 
   const handlePrevTrack = () => {
     dispatch(setPrevTrack());
-  }
+  };
 
   const handleLoop = () => {
     setIsLoop((prev) => !prev);
@@ -106,7 +113,7 @@ const Player = () => {
               <div
                 className={styles.playerBtnPrev}
                 onClick={() => {
-                  handlePrevTrack()
+                  handlePrevTrack();
                 }}
               >
                 <svg className={styles.playerBtnPrevSvg}>
@@ -125,7 +132,7 @@ const Player = () => {
               <div
                 className={styles.playerBtnNext}
                 onClick={() => {
-                  handleNextTrack()
+                  handleNextTrack();
                 }}
               >
                 <svg className={styles.playerBtnNextSvg}>
@@ -149,18 +156,20 @@ const Player = () => {
               <div
                 onClick={() => {
                   if (shuffled) {
-                    dispatch(setIsShuffle(false))
+                    dispatch(setIsShuffle(false));
                   } else {
-                    dispatch(setIsShuffle(true))
+                    dispatch(setIsShuffle(true));
                   }
                 }}
                 className={`${styles.playerBtnShuffle} ${styles.btnIcon}`}
               >
-                <svg className={
-                  shuffled
-                    ? styles.playerBtnRepeatSvgActive
-                    : styles.playerBtnShuffleSvg
-                }>
+                <svg
+                  className={
+                    shuffled
+                      ? styles.playerBtnRepeatSvgActive
+                      : styles.playerBtnShuffleSvg
+                  }
+                >
                   <use xlinkHref="img/icon/sprite.svg#icon-shuffle" />
                 </svg>
               </div>
@@ -185,13 +194,14 @@ const Player = () => {
               </div>
               <div className={styles.trackPlayLikeDis}>
                 <div className={`${styles.trackPlayLike} ${styles.btnIcon}`}>
-                  <svg className={styles.trackPlayLikeSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-like" />
-                  </svg>
-                </div>
-                <div className={`${styles.trackPlayDislike} ${styles.btnIcon}`}>
-                  <svg className={styles.trackPlayDislikeSvg}>
-                    <use xlinkHref="img/icon/sprite.svg#icon-dislike" />
+                  <svg onClick={handleLikeTrack} className={styles.trackPlayLikeSvg}>
+                    <use
+                      xlinkHref={
+                        isLiked
+                          ? "img/icon/sprite.svg#icon-liked"
+                          : "img/icon/sprite.svg#icon-like"
+                      }
+                    />
                   </svg>
                 </div>
               </div>

@@ -25,7 +25,7 @@ const Playlist = ({ tracks, error }: PlaylistProps) => {
           <p>{error}</p>
         ) : (
           tracks.map((track) => (
-            <Track key={track.id} track={track} trackData={tracks} />
+            <Track key={track._id} track={track} trackData={tracks} />
           ))
         )}
       </div>
