@@ -20,7 +20,10 @@ export async function registerUser(
 
   if (!res.ok) {
     const errorData = await res.json();
-    throw new Error(errorData.message || "Ошибка регистрации, проверьте формат email и надежность пароля");
+    throw new Error(
+      errorData.message ||
+        "Ошибка регистрации, проверьте формат email и надежность пароля",
+    );
   }
 
   return res.json();
@@ -48,9 +51,7 @@ export async function loginUser(email: string, password: string) {
 }
 
 // Обновить токен
-export async function refreshToken(
-  refresh: string | null
-) {
+export async function refreshToken(refresh: string | null) {
   const res = await fetch(USER_API_URL + "/token/refresh/", {
     method: "POST",
     body: JSON.stringify({

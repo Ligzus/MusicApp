@@ -17,12 +17,13 @@ export const useAppStore: () => AppStore = useStore;
 const useLikeTrack = (track: any) => {
   const dispatch = useAppDispatch();
   const tokens = {
-    access: useAppSelector(state => state.user.access),
-    refresh: useAppSelector(state => state.user.refresh),
+    access: useAppSelector((state) => state.user.access),
+    refresh: useAppSelector((state) => state.user.refresh),
   };
 
   const likeTracks = useAppSelector((state) => state.playlist.likedTracks);
-  const isLiked = Array.isArray(likeTracks) && !!likeTracks.find((t) => t._id === track._id);
+  const isLiked =
+    Array.isArray(likeTracks) && !!likeTracks.find((t) => t._id === track._id);
 
   const handleLikeTrack = async (e: React.MouseEvent) => {
     e.stopPropagation();

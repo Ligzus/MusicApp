@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import VolumeSlider from "../VolumeSlider/VolumeSlider";
@@ -24,7 +24,6 @@ const Player = () => {
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
   const shuffled = useAppSelector((state) => state.playlist.isShuffled);
   const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
-  
 
   const { handleLikeTrack, isLiked } = useLikeTrack(currentTrack);
 
@@ -194,7 +193,10 @@ const Player = () => {
               </div>
               <div className={styles.trackPlayLikeDis}>
                 <div className={`${styles.trackPlayLike} ${styles.btnIcon}`}>
-                  <svg onClick={handleLikeTrack} className={styles.trackPlayLikeSvg}>
+                  <svg
+                    onClick={handleLikeTrack}
+                    className={styles.trackPlayLikeSvg}
+                  >
                     <use
                       xlinkHref={
                         isLiked

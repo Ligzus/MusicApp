@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { loginUser, registerUser, refreshToken, getToken } from "../../api/user";
+import {
+  loginUser,
+  registerUser,
+  refreshToken,
+  getToken,
+} from "../../api/user";
 
 export const login = createAsyncThunk(
   "user/login",
@@ -13,7 +18,11 @@ export const login = createAsyncThunk(
 export const register = createAsyncThunk(
   "user/register",
   async (userInfo: { email: string; password: string; username: string }) => {
-    const user = await registerUser(userInfo.email, userInfo.password, userInfo.username);
+    const user = await registerUser(
+      userInfo.email,
+      userInfo.password,
+      userInfo.username,
+    );
     const tokens = await getToken(userInfo.email, userInfo.password);
     return { ...user, ...tokens };
   },

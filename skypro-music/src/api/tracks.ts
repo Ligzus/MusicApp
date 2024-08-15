@@ -18,7 +18,7 @@ export async function getCatalogTracks(id: string) {
   if (!res.ok) {
     throw new Error(res.statusText);
   }
-  
+
   return res.json();
 }
 
@@ -28,7 +28,7 @@ export async function getCatalogTrackItem(trackId: string) {
   if (!res.ok) {
     throw new Error(res.statusText);
   }
-  
+
   return res.json();
 }
 

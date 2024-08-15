@@ -12,18 +12,18 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
 
-  const user = useAppSelector(state => state.user);
+  const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const navToSignin = () => {
-    router.push("signin")
-  }
+    router.push("signin");
+  };
 
   const navLogout = () => {
     if (user) {
       dispatch(logout());
     }
-  }
+  };
 
   return (
     <nav className={styles.mainNav}>
@@ -52,16 +52,17 @@ const Nav = () => {
                 Главное
               </Link>
             </li>
-            {user.username 
-              ? <li className={styles.menuItem}>
-                  <Link href="/favorite" className={styles.menuLink}>
-                    Мой плейлист
-                  </Link>
-                </li>
-
-              : null  
-              }
-            <li className={styles.menuItem} onClick={user ? navToSignin : navLogout}>
+            {user.username ? (
+              <li className={styles.menuItem}>
+                <Link href="/favorite" className={styles.menuLink}>
+                  Мой плейлист
+                </Link>
+              </li>
+            ) : null}
+            <li
+              className={styles.menuItem}
+              onClick={user ? navToSignin : navLogout}
+            >
               <a href="#" className={styles.menuLink}>
                 {user.username ? "Выйти" : "Войти"}
               </a>
