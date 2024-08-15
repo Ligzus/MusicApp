@@ -31,21 +31,11 @@ const FavoriteTracks = () => {
   }, [dispatch, accessToken, refreshToken]);
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.container}>
-        <main className={styles.main}>
-          <Nav />
-          <div className={styles.mainCenterblock}>
-            <Search />
-            <h2 className={styles.centerblockH2}>Мой плейлист</h2>
-            <Filter tracks={likedTracks} />
-            <Playlist tracks={likedTracks} error={error} />
-          </div>
-          <Sidebar />
-        </main>
-        <Player />
-      </div>
-    </div>
+    <>
+      <h2 className={styles.centerblockH2}>Мой плейлист</h2>
+      <Filter tracks={likedTracks} />
+      <Playlist tracks={likedTracks} error={error} />
+    </>
   );
 };
 

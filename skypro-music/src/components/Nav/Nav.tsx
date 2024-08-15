@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { logout } from "@/store/features/userSlice";
+import Link from "next/link";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -22,14 +23,6 @@ const Nav = () => {
     if (user) {
       dispatch(logout());
     }
-  }
-
-  const navToFavotiteTracks = () => {
-    router.push("favorite")
-  }
-
-  const navToMain = () => {
-    router.push("/")
   }
 
   return (
@@ -55,15 +48,15 @@ const Nav = () => {
         <div className={styles.navMenu}>
           <ul className={styles.menuList}>
             <li className={styles.menuItem}>
-              <a href="#" className={styles.menuLink} onClick={navToMain}>
+              <Link href="/" className={styles.menuLink}>
                 Главное
-              </a>
+              </Link>
             </li>
             {user.username 
-              ? <li className={styles.menuItem} onClick={navToFavotiteTracks}>
-                  <a href="#" className={styles.menuLink}>
+              ? <li className={styles.menuItem}>
+                  <Link href="/favorite" className={styles.menuLink}>
                     Мой плейлист
-                  </a>
+                  </Link>
                 </li>
 
               : null  
