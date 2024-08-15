@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CenterBlock рендерится корректно 1`] = `
+<DocumentFragment>
+  <div
+    class="mainCenterblock"
+  >
+    <div
+      class="centerblockSearch"
+    >
+      <svg
+        class="searchSvg"
+      >
+        <use
+          xlink:href="img/icon/sprite.svg#icon-search"
+        />
+      </svg>
+      <input
+        class="searchText"
+        name="search"
+        placeholder="Поиск"
+        type="search"
+      />
+    </div>
+    <h2
+      class="centerblockH2"
+    >
+      Треки
+    </h2>
+    <div
+      class="centerblockFilter"
+    >
+      <div
+        class="filterTitle"
+      >
+        Искать по:
+      </div>
+      <div>
+        <div
+          class="filterButton btnText"
+        >
+          исполнителю
+        </div>
+      </div>
+      <div>
+        <div
+          class="filterButton btnText"
+        >
+          году
+        </div>
+      </div>
+      <div>
+        <div
+          class="filterButton btnText"
+        >
+          жанру
+        </div>
+      </div>
+    </div>
+    <div
+      class="centerblockContent"
+    >
+      <div
+        class="contentTitle"
+      >
+        <div
+          class="playlistTitleCol01"
+        >
+          Трек
+        </div>
+        <div
+          class="playlistTitleCol02"
+        >
+          Исполнитель
+        </div>
+        <div
+          class="playlistTitleCol03"
+        >
+          Альбом
+        </div>
+        <div
+          class="playlistTitleCol04"
+        >
+          <svg
+            class="playlistTitleSvg"
+          >
+            <use
+              xlink:href="img/icon/sprite.svg#icon-watch"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="contentPlaylist"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
