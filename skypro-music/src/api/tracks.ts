@@ -22,6 +22,16 @@ export async function getCatalogTracks(id: string) {
   return res.json();
 }
 
+export async function getCatalogTrackItem(trackId: string) {
+  const res = await fetch(API_URL + "/catalog/track/" + trackId);
+
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+  
+  return res.json();
+}
+
 export async function likeTrack({
   trackId,
   access,
