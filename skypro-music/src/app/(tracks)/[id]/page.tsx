@@ -2,7 +2,7 @@ import { getCatalogTrackItem, getCatalogTracks } from "@/api/tracks";
 import Filter from "@/components/Filter/Filter";
 import Playlist from "@/components/Playlist/Playlist";
 import { TrackType } from "@/types/tracks";
-import styles from '../../page.module.css';
+import styles from '../page.module.css';
 
 type CategoryType = {
     params: { id: string }

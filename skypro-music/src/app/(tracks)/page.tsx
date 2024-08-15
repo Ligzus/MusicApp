@@ -20,7 +20,7 @@ const MainTrackPage = async () => {
 
   return (
     <>
-        <h2 className={styles.centerblockH2}>Треки 2</h2>
+        <h2 className={styles.centerblockH2}>Треки</h2>
         <Filter tracks={tracks} />
         <Playlist tracks={tracks} error={error} />
     </>
