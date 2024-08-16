@@ -1,23 +1,19 @@
-import Search from "@/components/Search/Search";
 import styles from "./layout.module.css";
 import Nav from "@/components/Nav/Nav";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Player from "@/components/Player/Player";
 
-const TrackLayout = ({
-  children,
-}: Readonly<{
+type TrackLayoutProps = {
   children: React.ReactNode;
-}>) => {
+};
+
+const TrackLayout = ({ children }: TrackLayoutProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <main className={styles.main}>
           <Nav />
-          <div className={styles.mainCenterblock}>
-            <Search />
-            {children}
-          </div>
+          <div className={styles.mainCenterblock}>{children}</div>
           <Sidebar />
         </main>
         <Player />

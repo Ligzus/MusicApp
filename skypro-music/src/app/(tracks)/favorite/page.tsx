@@ -3,11 +3,7 @@
 import { useState, useEffect } from "react";
 import Filter from "@/components/Filter/Filter";
 import Playlist from "@/components/Playlist/Playlist";
-import Search from "@/components/Search/Search";
 import styles from "./page.module.css";
-import Nav from "@/components/Nav/Nav";
-import Sidebar from "@/components/Sidebar/Sidebar";
-import Player from "@/components/Player/Player";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getFavoriteTracks } from "@/store/features/playlistSlice";
 

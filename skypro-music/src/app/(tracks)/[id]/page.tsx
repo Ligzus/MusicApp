@@ -1,8 +1,7 @@
 import { getCatalogTrackItem, getCatalogTracks } from "@/api/tracks";
-import Filter from "@/components/Filter/Filter";
-import Playlist from "@/components/Playlist/Playlist";
-import { TrackType } from "@/types/tracks";
+import TrackSearch from "@/components/TrackSearch/TrackSearch";
 import styles from "../page.module.css";
+import { TrackType } from "@/types/tracks";
 
 type CategoryType = {
   params: { id: string };
@@ -15,12 +14,10 @@ export default async function CategoryPage({ params }: CategoryType) {
   let pageName: string = "";
 
   try {
-    // Получаем данные каталога треков
     const tracksData = await getCatalogTracks(id);
-    const tracksId = tracksData.data.items; // Получаем массив индексов треков
+    const tracksId = tracksData.data.items;
     pageName = tracksData.data.name;
 
-    // Проходим по каждому id трека и получаем данные по треку
     for (const trackId of tracksId) {
       const trackItemData = await getCatalogTrackItem(trackId.toString());
       if (trackItemData.success) {
@@ -35,10 +32,9 @@ export default async function CategoryPage({ params }: CategoryType) {
   }
 
   return (
-    <>
+    <div>
       <h2 className={styles.centerblockH2}>{pageName}</h2>
-      <Filter tracks={tracks} />
-      <Playlist tracks={tracks} error={error} />
-    </>
+      <TrackSearch tracks={tracks} error={error} />
+    </div>
   );
 }
