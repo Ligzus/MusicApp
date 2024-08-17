@@ -106,5 +106,14 @@
 .popup li:hover {
   background-color: #403849;
   color: #b672ff;
-  text-decoration: 2px solid underline;
+}
+
+.checkmark {
+  color: #b672ff;
+  font-size: 16px;
+  margin-left: 15px;
+}
+
+.popup span:hover {
+  text-decoration: none;
 }

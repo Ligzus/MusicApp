@@ -4,14 +4,18 @@ type AuthorFilterProps = {
   title: string;
   isActive: boolean;
   list: string[];
+  selectedAuthors: string[];
   handleFilter: () => void;
+  onAuthorChange: (author: string) => void;
 };
 
 const AuthorFilter = ({
   title,
   isActive,
   list,
+  selectedAuthors,
   handleFilter,
+  onAuthorChange,
 }: AuthorFilterProps) => {
   return (
     <div>
@@ -27,9 +31,18 @@ const AuthorFilter = ({
       </div>
       {isActive && (
         <div className={styles.popup}>
-          <ul>
+          <ul className={styles.authorList}>
             {list.map((author, index) => (
-              <li key={index}>{author}</li>
+              <li
+                key={index}
+                className={styles.authorItem}
+                onClick={() => onAuthorChange(author)}
+              >
+                {author}
+                {selectedAuthors.includes(author) && (
+                  <span className={styles.checkmark}>✔</span>
+                )}
+              </li>
             ))}
           </ul>
         </div>

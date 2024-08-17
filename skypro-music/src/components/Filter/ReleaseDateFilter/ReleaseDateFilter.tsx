@@ -4,20 +4,19 @@ type ReleaseDateFilterProps = {
   title: string;
   isActive: boolean;
   list: string[];
+  selectedDates: string[];
   handleFilter: () => void;
+  onDateChange: (date: string) => void;
 };
 
 const ReleaseDateFilter = ({
   title,
   isActive,
   list,
+  selectedDates,
   handleFilter,
+  onDateChange,
 }: ReleaseDateFilterProps) => {
-  const getYearFromDate = (dateString: string): string => {
-    const date = new Date(dateString);
-    return date.getFullYear().toString();
-  };
-
   return (
     <div>
       <div
@@ -32,9 +31,18 @@ const ReleaseDateFilter = ({
       </div>
       {isActive && (
         <div className={styles.popup}>
-          <ul>
-            {list.map((release_date, index) => (
-              <li key={index}>{getYearFromDate(release_date)}</li>
+          <ul className={styles.authorList}>
+            {list.map((releaseDate, index) => (
+              <li
+                key={index}
+                className={styles.authorItem}
+                onClick={() => onDateChange(releaseDate)}
+              >
+                {releaseDate}
+                {selectedDates.includes(releaseDate) && (
+                  <span className={styles.checkmark}>✔</span>
+                )}
+              </li>
             ))}
           </ul>
         </div>
