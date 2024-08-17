@@ -20,6 +20,7 @@ exports[`CenterBlock рендерится корректно 1`] = `
         name="search"
         placeholder="Поиск"
         type="search"
+        value=""
       />
     </div>
     <h2
