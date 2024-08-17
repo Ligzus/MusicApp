@@ -3,20 +3,22 @@ import styles from "../Filter.module.css";
 type ReleaseDateFilterProps = {
   title: string;
   isActive: boolean;
-  list: string[];
-  selectedDates: string[];
   handleFilter: () => void;
-  onDateChange: (date: string) => void;
+  onSortChange: (order: string) => void;
 };
 
 const ReleaseDateFilter = ({
   title,
   isActive,
-  list,
-  selectedDates,
   handleFilter,
-  onDateChange,
+  onSortChange,
 }: ReleaseDateFilterProps) => {
+  const sortOptions = [
+    { label: "По умолчанию", value: "default" },
+    { label: "Сначала новые", value: "newest" },
+    { label: "Сначала старые", value: "oldest" },
+  ];
+
   return (
     <div>
       <div
@@ -31,17 +33,17 @@ const ReleaseDateFilter = ({
       </div>
       {isActive && (
         <div className={styles.popup}>
-          <ul className={styles.authorList}>
-            {list.map((releaseDate, index) => (
+          <ul className={styles.sortList}>
+            {sortOptions.map((option, index) => (
               <li
                 key={index}
-                className={styles.authorItem}
-                onClick={() => onDateChange(releaseDate)}
+                className={styles.sortItem}
+                onClick={() => {
+                  onSortChange(option.value);
+                  handleFilter(); // Закрываем фильтр после выбора опции
+                }}
               >
-                {releaseDate}
-                {selectedDates.includes(releaseDate) && (
-                  <span className={styles.checkmark}>✔</span>
-                )}
+                {option.label}
               </li>
             ))}
           </ul>

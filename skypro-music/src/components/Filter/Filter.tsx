@@ -4,35 +4,29 @@ import styles from "./Filter.module.css";
 import AuthorFilter from "./AuthorFilter/AuthorFilter";
 import ReleaseDateFilter from "./ReleaseDateFilter/ReleaseDateFilter";
 import GenreFilter from "./GenreFilter/GenreFilter";
-import {
-  getUniqueValues,
-  getUniqueYearsFromDates,
-} from "@/utils/getUniqueValues";
+import { getUniqueValues } from "@/utils/getUniqueValues";
 
 type FilterProps = {
   tracks: TrackType[];
   selectedAuthors: string[];
-  selectedDates: string[];
   selectedGenres: string[];
   onAuthorChange: (author: string) => void;
-  onDateChange: (date: string) => void;
   onGenreChange: (genre: string) => void;
+  onSortChange: (order: string) => void;
 };
 
 const Filter = ({
   tracks,
   selectedAuthors,
-  selectedDates,
   selectedGenres,
   onAuthorChange,
-  onDateChange,
   onGenreChange,
+  onSortChange,
 }: FilterProps) => {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
   const uniqueAuthors = getUniqueValues(tracks, "author");
-  const uniqueReleaseDates = getUniqueYearsFromDates(tracks, "release_date");
-  const uniqueGenres = getUniqueValues(tracks, "genre");
+  const uniqueGenre = getUniqueValues(tracks, "genre");
 
   const handleFilter = (filter: string) => {
     setActiveFilter((prev) => (prev === filter ? null : filter));
@@ -67,15 +61,13 @@ const Filter = ({
       <ReleaseDateFilter
         title="году"
         isActive={activeFilter === "release_date"}
-        list={uniqueReleaseDates}
-        selectedDates={selectedDates}
         handleFilter={() => handleFilter("release_date")}
-        onDateChange={onDateChange}
+        onSortChange={onSortChange} // Добавляем обработчик изменения сортировки
       />
       <GenreFilter
         title="жанру"
         isActive={activeFilter === "genre"}
-        list={uniqueGenres}
+        list={uniqueGenre}
         selectedGenres={selectedGenres}
         handleFilter={() => handleFilter("genre")}
         onGenreChange={onGenreChange}
