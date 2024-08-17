@@ -11,7 +11,7 @@ export function getUniqueValues<T, K extends keyof T>(
 
 export function getUniqueYearsFromDates<T, K extends keyof T>(
   items: T[],
-  field: K
+  field: K,
 ): string[] {
   const uniqueYears = new Set<string>();
   items.forEach((item) => {

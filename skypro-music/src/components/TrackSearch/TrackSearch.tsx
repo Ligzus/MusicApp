@@ -1,10 +1,11 @@
-'use client'
+"use client";
 
 import { useEffect, useState } from "react";
 import { TrackType } from "@/types/tracks";
 import Search from "@/components/Search/Search";
 import Filter from "@/components/Filter/Filter";
 import Playlist from "@/components/Playlist/Playlist";
+import style from "./TrackSearch.module.css";
 
 type TrackSearchProps = {
   tracks: TrackType[];
@@ -19,46 +20,47 @@ const TrackSearch = ({ tracks, error }: TrackSearchProps) => {
 
   const handleSearch = (query: string) => {
     const filtered = tracks.filter((track) =>
-      track.name.toLowerCase().includes(query.toLowerCase())
+      track.name.toLowerCase().includes(query.toLowerCase()),
     );
     setFilteredTracks(filtered);
   };
 
   const handleFilterChange = () => {
-    const normalizedSelectedGenres = selectedGenres.map(genre => genre.trim().toLowerCase());
-  
+    const normalizedSelectedGenres = selectedGenres.map((genre) =>
+      genre.trim().toLowerCase(),
+    );
+
     const filtered = tracks.filter((track) => {
       const matchAuthor =
-        selectedAuthors.length === 0 ||
-        selectedAuthors.includes(track.author);
-  
+        selectedAuthors.length === 0 || selectedAuthors.includes(track.author);
+
       const matchDate =
         selectedDates.length === 0 ||
-        selectedDates.includes(new Date(track.release_date).getFullYear().toString());
-  
+        selectedDates.includes(
+          new Date(track.release_date).getFullYear().toString(),
+        );
+
       // Преобразуем жанры трека в массив, если это строка
       const trackGenres = Array.isArray(track.genre)
         ? track.genre.map((g: string) => g.trim().toLowerCase())
         : [track.genre.trim().toLowerCase()];
-  
+
       const matchGenre =
         normalizedSelectedGenres.length === 0 ||
-        normalizedSelectedGenres.some(genre => trackGenres.includes(genre));
-  
+        normalizedSelectedGenres.some((genre) => trackGenres.includes(genre));
+
       return matchAuthor && matchDate && matchGenre;
     });
-  
+
     console.log("Filtered Tracks:", filtered); // Вывод отфильтрованных треков
     setFilteredTracks(filtered);
   };
-  
-  
 
   const handleAuthorChange = (author: string) => {
     setSelectedAuthors((prev) =>
       prev.includes(author)
         ? prev.filter((item) => item !== author)
-        : [...prev, author]
+        : [...prev, author],
     );
   };
 
@@ -66,7 +68,7 @@ const TrackSearch = ({ tracks, error }: TrackSearchProps) => {
     setSelectedDates((prev) =>
       prev.includes(date)
         ? prev.filter((item) => item !== date)
-        : [...prev, date]
+        : [...prev, date],
     );
   };
 
@@ -74,7 +76,7 @@ const TrackSearch = ({ tracks, error }: TrackSearchProps) => {
     setSelectedGenres((prev) =>
       prev.includes(genre)
         ? prev.filter((item) => item !== genre)
-        : [...prev, genre]
+        : [...prev, genre],
     );
   };
 
@@ -95,7 +97,11 @@ const TrackSearch = ({ tracks, error }: TrackSearchProps) => {
         onDateChange={handleDateChange}
         onGenreChange={handleGenreChange}
       />
-      <Playlist tracks={filteredTracks} error={error} />
+      {filteredTracks.length !== 0 ? (
+        <Playlist tracks={filteredTracks} error={error} />
+      ) : (
+        <div className={style.errorText}>Ничего не найдено</div>
+      )}
     </>
   );
 };

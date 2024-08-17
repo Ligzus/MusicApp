@@ -4,7 +4,10 @@ import styles from "./Filter.module.css";
 import AuthorFilter from "./AuthorFilter/AuthorFilter";
 import ReleaseDateFilter from "./ReleaseDateFilter/ReleaseDateFilter";
 import GenreFilter from "./GenreFilter/GenreFilter";
-import { getUniqueValues, getUniqueYearsFromDates } from "@/utils/getUniqueValues";
+import {
+  getUniqueValues,
+  getUniqueYearsFromDates,
+} from "@/utils/getUniqueValues";
 
 type FilterProps = {
   tracks: TrackType[];
