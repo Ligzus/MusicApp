@@ -32,8 +32,17 @@ const mockTracks: TrackType[] = [
 ];
 
 describe("Компонент Filter", () => {
+  const defaultProps = {
+    tracks: mockTracks,
+    selectedAuthors: [],
+    selectedGenres: [],
+    onAuthorChange: jest.fn(),
+    onGenreChange: jest.fn(),
+    onSortChange: jest.fn(),
+  };
+
   it("рендерится без ошибок и отображает заголовки фильтров", () => {
-    render(<Filter tracks={mockTracks} />);
+    render(<Filter {...defaultProps} />);
 
     // Проверяем, что заголовки фильтров отображаются
     expect(screen.getByText("исполнителю")).toBeInTheDocument();
@@ -42,7 +51,7 @@ describe("Компонент Filter", () => {
   });
 
   it("открывает и закрывает фильтр исполнителя при нажатии", () => {
-    render(<Filter tracks={mockTracks} />);
+    render(<Filter {...defaultProps} />);
 
     const authorFilterButton = screen.getByText("исполнителю");
 
@@ -58,7 +67,7 @@ describe("Компонент Filter", () => {
   });
 
   it("закрывает активный фильтр при клике вне его области", () => {
-    render(<Filter tracks={mockTracks} />);
+    render(<Filter {...defaultProps} />);
 
     const authorFilterButton = screen.getByText("исполнителю");
 
