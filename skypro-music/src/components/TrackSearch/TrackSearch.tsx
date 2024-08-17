@@ -45,7 +45,6 @@ const TrackSearch = ({ tracks, error }: TrackSearchProps) => {
       return matchAuthor && matchGenre;
     });
 
-    // Сортировка по выбранному порядку
     const sorted = filtered.sort((a, b) => {
       const dateA = new Date(a.release_date).getTime();
       const dateB = new Date(b.release_date).getTime();
@@ -55,7 +54,7 @@ const TrackSearch = ({ tracks, error }: TrackSearchProps) => {
       } else if (sortOrder === "oldest") {
         return dateA - dateB;
       } else {
-        return 0; // "По умолчанию" не сортирует
+        return 0;
       }
     });
 
@@ -95,7 +94,7 @@ const TrackSearch = ({ tracks, error }: TrackSearchProps) => {
         selectedGenres={selectedGenres}
         onAuthorChange={handleAuthorChange}
         onGenreChange={handleGenreChange}
-        onSortChange={handleSortChange} // Передаем функцию для изменения сортировки
+        onSortChange={handleSortChange}
       />
       {filteredTracks.length !== 0 ? (
         <Playlist tracks={filteredTracks} error={error} />

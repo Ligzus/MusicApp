@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Filter from "@/components/Filter/Filter";
-import Playlist from "@/components/Playlist/Playlist";
 import styles from "./page.module.css";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getFavoriteTracks } from "@/store/features/playlistSlice";
+import TrackSearch from "@/components/TrackSearch/TrackSearch";
 
 const FavoriteTracks = () => {
   const [error, setError] = useState<string>("");
@@ -35,8 +35,7 @@ const FavoriteTracks = () => {
   return (
     <>
       <h2 className={styles.centerblockH2}>Мой плейлист</h2>
-      <Filter tracks={likedTracks} />
-      <Playlist tracks={likedTracks} error={error} />
+      <TrackSearch tracks={likedTracks} error={error} />
     </>
   );
 };
