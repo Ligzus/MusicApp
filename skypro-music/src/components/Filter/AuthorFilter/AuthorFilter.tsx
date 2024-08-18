@@ -12,8 +12,8 @@ type AuthorFilterProps = {
 const AuthorFilter = ({
   title,
   isActive,
-  list,
-  selectedAuthors,
+  list = [],
+  selectedAuthors = [],
   handleFilter,
   onAuthorChange,
 }: AuthorFilterProps) => {

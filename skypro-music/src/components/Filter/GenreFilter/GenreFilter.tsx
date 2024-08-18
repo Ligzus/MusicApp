@@ -12,8 +12,8 @@ type GenreFilterProps = {
 const GenreFilter = ({
   title,
   isActive,
-  list,
-  selectedGenres,
+  list = [],
+  selectedGenres = [],
   handleFilter,
   onGenreChange,
 }: GenreFilterProps) => {
