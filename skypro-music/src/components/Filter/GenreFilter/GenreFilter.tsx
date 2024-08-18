@@ -28,6 +28,17 @@ const GenreFilter = ({
         onClick={handleFilter}
       >
         {title}
+        {selectedGenres.length !== 0 && (
+          <div
+            className={
+              isActive
+                ? `${styles.counterGenresActive}`
+                : `${styles.counterGenres}`
+            }
+          >
+            <span>{selectedGenres.length}</span>
+          </div>
+        )}
       </div>
       {isActive && (
         <div className={styles.popup}>

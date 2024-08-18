@@ -28,6 +28,17 @@ const AuthorFilter = ({
         onClick={handleFilter}
       >
         {title}
+        {selectedAuthors.length !== 0 && (
+          <div
+            className={
+              isActive
+                ? `${styles.counterAuthorActive}`
+                : `${styles.counterAuthor}`
+            }
+          >
+            <span>{selectedAuthors.length}</span>
+          </div>
+        )}
       </div>
       {isActive && (
         <div className={styles.popup}>

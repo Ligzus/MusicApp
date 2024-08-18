@@ -58,6 +58,7 @@ const Filter = ({
         handleFilter={() => handleFilter("author")}
         onAuthorChange={onAuthorChange}
       />
+
       <ReleaseDateFilter
         title="году"
         isActive={activeFilter === "release_date"}
