@@ -52,7 +52,6 @@ export default function SignIn() {
     try {
       await dispatch(login({ email, password })).unwrap();
       router.push("/");
-      console.log(token);
     } catch (error: any) {
       setError(error.message);
     }

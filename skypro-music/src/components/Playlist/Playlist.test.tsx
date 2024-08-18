@@ -4,25 +4,25 @@ import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import Playlist from "./Playlist";
 import { TrackType } from "@/types/tracks";
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 
 // мок-стор с начальными данными
 const mockStore = configureStore([]);
 const initialState = {
   playlist: {
-    currentTrack: null, 
-    likedTracks: [], 
-    playlist: [], 
-    shuffledPlayList: [], 
-    isShuffled: false, 
-    isPlaying: false, 
+    currentTrack: null,
+    likedTracks: [],
+    playlist: [],
+    shuffledPlayList: [],
+    isShuffled: false,
+    isPlaying: false,
   },
   user: {
     email: "",
     username: "",
     access: null,
     refresh: null,
-  }
+  },
 };
 
 const store = mockStore(initialState);
@@ -55,25 +55,25 @@ describe("Playlist", () => {
         stared_user: [],
       },
     ];
-    
+
     const { container } = render(
       <Provider store={store}>
         <Playlist tracks={tracks} error="" />
-      </Provider>
+      </Provider>,
     );
-    
+
     expect(container).toMatchSnapshot();
   });
 
   it("выводит сообщение об ошибке", () => {
     const error = "Что-то пошло не так!";
-    
+
     const { getByText } = render(
       <Provider store={store}>
         <Playlist tracks={[]} error={error} />
-      </Provider>
+      </Provider>,
     );
-    
+
     expect(getByText(error)).toBeInTheDocument();
   });
 });
