@@ -1,6 +1,7 @@
 import { TrackType } from "@/types/tracks";
 import styles from "./Playlist.module.css";
 import Track from "../Track/Track";
+import { useMemo } from "react";
 
 type PlaylistProps = {
   tracks: TrackType[];
@@ -8,6 +9,13 @@ type PlaylistProps = {
 };
 
 const Playlist = ({ tracks, error }: PlaylistProps) => {
+  // Мемоизация списка треков
+  const renderedTracks = useMemo(() => {
+    return tracks.map((track) => (
+      <Track key={track._id} track={track} trackData={tracks} />
+    ));
+  }, [tracks]);
+
   return (
     <div className={styles.centerblockContent}>
       <div className={styles.contentTitle}>
@@ -24,9 +32,7 @@ const Playlist = ({ tracks, error }: PlaylistProps) => {
         {error ? (
           <p>{error}</p>
         ) : (
-          tracks.map((track) => (
-            <Track key={track._id} track={track} trackData={tracks} />
-          ))
+          renderedTracks
         )}
       </div>
     </div>

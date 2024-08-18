@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import VolumeSlider from "../VolumeSlider/VolumeSlider";
 import styles from "./Player.module.css";
 import ProgressBar from "./ProgressBar/ProgressBar";
@@ -47,7 +47,8 @@ const Player = () => {
     }
   }, [isLoop]);
 
-  const handlePlay = () => {
+  // Мемоизация функций управления плеером
+  const handlePlay = useCallback(() => {
     const audio = audioRef.current;
     if (audio) {
       if (isPlaying) {
@@ -62,25 +63,29 @@ const Player = () => {
     } else {
       dispatch(setIsPlaying(true));
     }
-  };
+  }, [isPlaying, dispatch]);
 
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSeek = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if (audioRef.current) {
       audioRef.current.currentTime = Number(e.target.value);
     }
-  };
+  }, []);
 
-  const handleNextTrack = () => {
+  const handleNextTrack = useCallback(() => {
     dispatch(setNextTrack());
-  };
+  }, [dispatch]);
 
-  const handlePrevTrack = () => {
+  const handlePrevTrack = useCallback(() => {
     dispatch(setPrevTrack());
-  };
+  }, [dispatch]);
 
-  const handleLoop = () => {
+  const handleLoop = useCallback(() => {
     setIsLoop((prev) => !prev);
-  };
+  }, []);
+
+  const handleShuffle = useCallback(() => {
+    dispatch(setIsShuffle(!shuffled));
+  }, [shuffled, dispatch]);
 
   if (!currentTrack) {
     return null;
@@ -109,12 +114,7 @@ const Player = () => {
         <div className={styles.barPlayerBlock}>
           <div className={styles.barPlayer}>
             <div className={styles.playerControls}>
-              <div
-                className={styles.playerBtnPrev}
-                onClick={() => {
-                  handlePrevTrack();
-                }}
-              >
+              <div className={styles.playerBtnPrev} onClick={handlePrevTrack}>
                 <svg className={styles.playerBtnPrevSvg}>
                   <use xlinkHref="img/icon/sprite.svg#icon-prev" />
                 </svg>
@@ -128,12 +128,7 @@ const Player = () => {
                   )}
                 </svg>
               </div>
-              <div
-                className={styles.playerBtnNext}
-                onClick={() => {
-                  handleNextTrack();
-                }}
-              >
+              <div className={styles.playerBtnNext} onClick={handleNextTrack}>
                 <svg className={styles.playerBtnNextSvg}>
                   <use xlinkHref="img/icon/sprite.svg#icon-next" />
                 </svg>
@@ -152,16 +147,7 @@ const Player = () => {
                   <use xlinkHref="img/icon/sprite.svg#icon-repeat" />
                 </svg>
               </div>
-              <div
-                onClick={() => {
-                  if (shuffled) {
-                    dispatch(setIsShuffle(false));
-                  } else {
-                    dispatch(setIsShuffle(true));
-                  }
-                }}
-                className={`${styles.playerBtnShuffle} ${styles.btnIcon}`}
-              >
+              <div onClick={handleShuffle} className={`${styles.playerBtnShuffle} ${styles.btnIcon}`}>
                 <svg
                   className={
                     shuffled
@@ -193,10 +179,7 @@ const Player = () => {
               </div>
               <div className={styles.trackPlayLikeDis}>
                 <div className={`${styles.trackPlayLike} ${styles.btnIcon}`}>
-                  <svg
-                    onClick={handleLikeTrack}
-                    className={styles.trackPlayLikeSvg}
-                  >
+                  <svg onClick={handleLikeTrack} className={styles.trackPlayLikeSvg}>
                     <use
                       xlinkHref={
                         isLiked

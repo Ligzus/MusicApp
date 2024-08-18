@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { TrackType } from "@/types/tracks";
 import styles from "./Filter.module.css";
 import AuthorFilter from "./AuthorFilter/AuthorFilter";
@@ -25,8 +25,9 @@ const Filter = ({
 }: FilterProps) => {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
-  const uniqueAuthors = getUniqueValues(tracks, "author");
-  const uniqueGenre = getUniqueValues(tracks, "genre");
+  // Мемоизация уникальных авторов и жанров
+  const uniqueAuthors = useMemo(() => getUniqueValues(tracks, "author"), [tracks]);
+  const uniqueGenres = useMemo(() => getUniqueValues(tracks, "genre"), [tracks]);
 
   const handleFilter = (filter: string) => {
     setActiveFilter((prev) => (prev === filter ? null : filter));
@@ -63,12 +64,12 @@ const Filter = ({
         title="году"
         isActive={activeFilter === "release_date"}
         handleFilter={() => handleFilter("release_date")}
-        onSortChange={onSortChange} // Добавляем обработчик изменения сортировки
+        onSortChange={onSortChange}
       />
       <GenreFilter
         title="жанру"
         isActive={activeFilter === "genre"}
-        list={uniqueGenre}
+        list={uniqueGenres}
         selectedGenres={selectedGenres}
         handleFilter={() => handleFilter("genre")}
         onGenreChange={onGenreChange}
