@@ -5,6 +5,7 @@ import styles from "./Track.module.css";
 import { formatDuration } from "@/utils/timeFormat";
 import useLikeTrack, { useAppDispatch, useAppSelector } from "@/hooks";
 import { setCurrentTrack } from "@/store/features/playlistSlice";
+import { memo } from "react";
 
 type TrackProps = {
   track: TrackType;
@@ -79,4 +80,4 @@ const Track = ({ track, trackData }: TrackProps) => {
   );
 };
 
-export default Track;
+export default memo(Track);

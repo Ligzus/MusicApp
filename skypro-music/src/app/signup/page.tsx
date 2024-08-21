@@ -50,9 +50,12 @@ export default function SignUp() {
     try {
       await dispatch(register({ email, password, username })).unwrap();
       router.push("/");
-    } catch (error: any) {
-      let errorMessage = error.message;
-      setError(errorMessage);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        let errorMessage = error.message;
+        setError(errorMessage);
+      }
+      
     }
   };
 

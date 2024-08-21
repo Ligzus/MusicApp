@@ -281,8 +281,9 @@
 }
 
 .trackPlayLikeSvg {
-  width: 14px;
-  height: 12px;
+  margin-left: 20px;
+  width: 16px;
+  height: 16px;
   fill: transparent;
   stroke: #696969;
 }

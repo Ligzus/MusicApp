@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styles from "./ProgressBar.module.css";
 import { formatDuration } from "@/utils/timeFormat";
 
@@ -8,7 +9,7 @@ type ProgressBarProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function ProgressBar({
+function ProgressBar({
   max,
   value,
   step,
@@ -33,3 +34,5 @@ export default function ProgressBar({
     </>
   );
 }
+
+export default memo(ProgressBar);

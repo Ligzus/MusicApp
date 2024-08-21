@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Filter from "@/components/Filter/Filter";
 import styles from "./page.module.css";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getFavoriteTracks } from "@/store/features/playlistSlice";
@@ -30,7 +29,7 @@ const FavoriteTracks = () => {
     };
 
     fetchFavoriteTracks();
-  }, [dispatch, accessToken, refreshToken]);
+  }, [accessToken, refreshToken]);
 
   return (
     <>

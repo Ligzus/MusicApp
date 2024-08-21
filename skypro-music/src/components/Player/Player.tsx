@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, memo } from "react";
 import VolumeSlider from "../VolumeSlider/VolumeSlider";
 import styles from "./Player.module.css";
 import ProgressBar from "./ProgressBar/ProgressBar";
@@ -199,4 +199,4 @@ const Player = () => {
   );
 };
 
-export default Player;
+export default memo(Player);

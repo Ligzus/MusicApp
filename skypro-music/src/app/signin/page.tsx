@@ -52,8 +52,10 @@ export default function SignIn() {
     try {
       await dispatch(login({ email, password })).unwrap();
       router.push("/");
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
     }
   };
 

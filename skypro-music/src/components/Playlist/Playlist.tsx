@@ -1,7 +1,7 @@
 import { TrackType } from "@/types/tracks";
 import styles from "./Playlist.module.css";
 import Track from "../Track/Track";
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 
 type PlaylistProps = {
   tracks: TrackType[];
@@ -39,4 +39,4 @@ const Playlist = ({ tracks, error }: PlaylistProps) => {
   );
 };
 
-export default Playlist;
+export default memo(Playlist);
