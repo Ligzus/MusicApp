@@ -9,12 +9,7 @@ type ProgressBarProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-function ProgressBar({
-  max,
-  value,
-  step,
-  onChange,
-}: ProgressBarProps) {
+function ProgressBar({ max, value, step, onChange }: ProgressBarProps) {
   return (
     <>
       <div className={styles.trakTimeBlock}>

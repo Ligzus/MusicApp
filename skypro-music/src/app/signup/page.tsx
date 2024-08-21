@@ -55,7 +55,6 @@ export default function SignUp() {
         let errorMessage = error.message;
         setError(errorMessage);
       }
-      
     }
   };
 

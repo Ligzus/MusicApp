@@ -147,7 +147,10 @@ const Player = () => {
                   <use xlinkHref="img/icon/sprite.svg#icon-repeat" />
                 </svg>
               </div>
-              <div onClick={handleShuffle} className={`${styles.playerBtnShuffle} ${styles.btnIcon}`}>
+              <div
+                onClick={handleShuffle}
+                className={`${styles.playerBtnShuffle} ${styles.btnIcon}`}
+              >
                 <svg
                   className={
                     shuffled
@@ -179,7 +182,10 @@ const Player = () => {
               </div>
               <div className={styles.trackPlayLikeDis}>
                 <div className={`${styles.trackPlayLike} ${styles.btnIcon}`}>
-                  <svg onClick={handleLikeTrack} className={styles.trackPlayLikeSvg}>
+                  <svg
+                    onClick={handleLikeTrack}
+                    className={styles.trackPlayLikeSvg}
+                  >
                     <use
                       xlinkHref={
                         isLiked

@@ -4,11 +4,18 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export const getFavoriteTracks = createAsyncThunk(
   "playlist/getFavoriteTracks",
-  async ({ access, refresh }: { access: string | null; refresh: string | null }) => {
+  async ({
+    access,
+    refresh,
+  }: {
+    access: string | null;
+    refresh: string | null;
+  }) => {
     if (access && refresh) {
       const favoriteTracks = await fetchFavoriteTracks({ access, refresh });
       return favoriteTracks.data;
-  }},
+    }
+  },
 );
 
 type PlaylistStateType = {
@@ -43,52 +50,52 @@ const playlistSlice = createSlice({
         () => 0.5 - Math.random(),
       );
     },
-    
+
     setNextTrack: (state) => {
       const currentPlaylist = state.isShuffled
-      ? state.shuffledPlayList
-      : state.playlist;
+        ? state.shuffledPlayList
+        : state.playlist;
       const currentTrackIndex = currentPlaylist.findIndex(
         (track) => track._id === state.currentTrack?._id,
       );
-      
+
       const nextTrack = currentPlaylist[currentTrackIndex + 1];
-      
+
       if (nextTrack) {
         state.currentTrack = nextTrack;
       }
     },
-    
+
     setPrevTrack: (state) => {
       const currentPlaylist = state.isShuffled
-      ? state.shuffledPlayList
-      : state.playlist;
+        ? state.shuffledPlayList
+        : state.playlist;
       const currentTrackIndex = currentPlaylist.findIndex(
         (track) => track._id === state.currentTrack?._id,
       );
-      
+
       const nextTrack = currentPlaylist[currentTrackIndex - 1];
-      
+
       if (nextTrack) {
         state.currentTrack = nextTrack;
       }
     },
-    
+
     setIsShuffle: (state, action: PayloadAction<boolean>) => {
       state.isShuffled = action.payload;
     },
-    
+
     setIsPlaying: (state, action: PayloadAction<boolean>) => {
       state.isPlaying = action.payload;
     },
-    
+
     setDislikeTrack: (state, action: PayloadAction<TrackType>) => {
       const dislikedTrackId = action.payload._id;
       state.likedTracks = state.likedTracks.filter(
         (track) => track._id !== dislikedTrackId,
       );
     },
-    
+
     setLikeTrack: (state, action: PayloadAction<TrackType>) => {
       const likedTrack = action.payload;
       state.likedTracks.push(likedTrack);

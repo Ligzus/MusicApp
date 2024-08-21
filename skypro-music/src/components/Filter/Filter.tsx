@@ -26,8 +26,14 @@ const Filter = ({
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
   // Мемоизация уникальных авторов и жанров
-  const uniqueAuthors = useMemo(() => getUniqueValues(tracks, "author"), [tracks]);
-  const uniqueGenres = useMemo(() => getUniqueValues(tracks, "genre"), [tracks]);
+  const uniqueAuthors = useMemo(
+    () => getUniqueValues(tracks, "author"),
+    [tracks],
+  );
+  const uniqueGenres = useMemo(
+    () => getUniqueValues(tracks, "genre"),
+    [tracks],
+  );
 
   const handleFilter = (filter: string) => {
     setActiveFilter((prev) => (prev === filter ? null : filter));

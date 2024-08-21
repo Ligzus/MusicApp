@@ -29,11 +29,7 @@ const Playlist = ({ tracks, error }: PlaylistProps) => {
         </div>
       </div>
       <div className={styles.contentPlaylist}>
-        {error ? (
-          <p>{error}</p>
-        ) : (
-          renderedTracks
-        )}
+        {error ? <p>{error}</p> : renderedTracks}
       </div>
     </div>
   );

@@ -25,7 +25,9 @@ const useLikeTrack = (track: TrackType) => {
   const likeTracks = useAppSelector((state) => state.playlist.likedTracks);
 
   const isLiked =
-    track && Array.isArray(likeTracks) && likeTracks.some((t) => t._id === track._id);
+    track &&
+    Array.isArray(likeTracks) &&
+    likeTracks.some((t) => t._id === track._id);
 
   const handleLikeTrack = async (e: React.MouseEvent) => {
     e.stopPropagation();
