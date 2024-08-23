@@ -50,10 +50,7 @@ const playlistSlice = createSlice({
         : action.payload;
     },
 
-    setCurrentTrack: (
-      state,
-      action: PayloadAction<TrackType>,
-    ) => {
+    setCurrentTrack: (state, action: PayloadAction<TrackType>) => {
       state.currentTrack = action.payload;
     },
 

@@ -24,9 +24,11 @@ const Playlist = ({ tracks, error }: PlaylistProps) => {
         </div>
       </div>
       <div className={styles.contentPlaylist}>
-        {error ? <p>{error}</p> : tracks.map((track) => (
-          <Track key={track._id} track={track} />
-        ))}
+        {error ? (
+          <p>{error}</p>
+        ) : (
+          tracks.map((track) => <Track key={track._id} track={track} />)
+        )}
       </div>
     </div>
   );
