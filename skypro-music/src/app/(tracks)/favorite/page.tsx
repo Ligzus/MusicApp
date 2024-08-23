@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getFavoriteTracks } from "@/store/features/playlistSlice";
-import TrackSearch from "@/components/TrackSearch/TrackSearch";
+import Playlist from "@/components/Playlist/Playlist";
 
 const FavoriteTracks = () => {
   const [error, setError] = useState<string>("");
@@ -34,7 +34,7 @@ const FavoriteTracks = () => {
   return (
     <>
       <h2 className={styles.centerblockH2}>Мой плейлист</h2>
-      <TrackSearch tracks={likedTracks} error={error} />
+      <Playlist tracks={likedTracks} error={error} />
     </>
   );
 };
