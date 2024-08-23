@@ -21,6 +21,8 @@ const TrackSearch = ({ tracks, error }: TrackSearchProps) => {
   const [sortOrder, setSortOrder] = useState<string>("default");
 
   const dispatch = useAppDispatch();
+  const accessToken = useAppSelector((state) => state.user.access);
+  const refreshToken = useAppSelector((state) => state.user.refresh);
 
   const handleSearch = (query: string) => {
     const filtered = tracks.filter((track) =>
@@ -92,9 +94,6 @@ const TrackSearch = ({ tracks, error }: TrackSearchProps) => {
   useEffect(() => {
     dispatch(setPlaylist(filteredTracks));
   }, [filteredTracks, dispatch]);
-
-  const accessToken = useAppSelector((state) => state.user.access);
-  const refreshToken = useAppSelector((state) => state.user.refresh);
 
   useEffect(() => {
     if (accessToken) {
