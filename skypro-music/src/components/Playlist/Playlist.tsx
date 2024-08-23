@@ -1,7 +1,9 @@
+"use client";
+
 import { TrackType } from "@/types/tracks";
 import styles from "./Playlist.module.css";
 import Track from "../Track/Track";
-import { memo, useMemo } from "react";
+import { memo } from "react";
 
 type PlaylistProps = {
   tracks: TrackType[];
@@ -9,13 +11,6 @@ type PlaylistProps = {
 };
 
 const Playlist = ({ tracks, error }: PlaylistProps) => {
-  // Мемоизация списка треков
-  const renderedTracks = useMemo(() => {
-    return tracks.map((track) => (
-      <Track key={track._id} track={track} trackData={tracks} />
-    ));
-  }, [tracks]);
-
   return (
     <div className={styles.centerblockContent}>
       <div className={styles.contentTitle}>
@@ -29,7 +24,9 @@ const Playlist = ({ tracks, error }: PlaylistProps) => {
         </div>
       </div>
       <div className={styles.contentPlaylist}>
-        {error ? <p>{error}</p> : renderedTracks}
+        {error ? <p>{error}</p> : tracks.map((track) => (
+          <Track key={track._id} track={track} />
+        ))}
       </div>
     </div>
   );

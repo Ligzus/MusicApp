@@ -6,6 +6,8 @@ import Search from "@/components/Search/Search";
 import Filter from "@/components/Filter/Filter";
 import Playlist from "@/components/Playlist/Playlist";
 import style from "./TrackSearch.module.css";
+import { useAppDispatch } from "@/hooks";
+import { setPlaylist } from "@/store/features/playlistSlice";
 
 type TrackSearchProps = {
   tracks: TrackType[];
@@ -17,6 +19,8 @@ const TrackSearch = ({ tracks, error }: TrackSearchProps) => {
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [sortOrder, setSortOrder] = useState<string>("default");
+
+  const dispatch = useAppDispatch();
 
   const handleSearch = (query: string) => {
     const filtered = tracks.filter((track) =>
@@ -84,6 +88,11 @@ const TrackSearch = ({ tracks, error }: TrackSearchProps) => {
   useEffect(() => {
     handleFilterChange();
   }, [selectedAuthors, selectedGenres, sortOrder]);
+
+  useEffect(() => {
+    // Отправка отфильтрованного плейлиста в глобальное состояние
+    dispatch(setPlaylist(filteredTracks));
+  }, [filteredTracks, dispatch]);
 
   return (
     <>

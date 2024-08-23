@@ -4,37 +4,33 @@ import { useEffect, useRef, useState, useCallback, memo } from "react";
 import VolumeSlider from "../VolumeSlider/VolumeSlider";
 import styles from "./Player.module.css";
 import ProgressBar from "./ProgressBar/ProgressBar";
-import useLikeTrack from "@/hooks";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import useLikeTrack, { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   setIsPlaying,
   setIsShuffle,
   setNextTrack,
   setPrevTrack,
 } from "@/store/features/playlistSlice";
+import { TrackType } from "@/types/tracks";
 
 const Player = () => {
   const [isLoop, setIsLoop] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const duration = audioRef.current?.duration || 0;
-
   const dispatch = useAppDispatch();
 
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
   const shuffled = useAppSelector((state) => state.playlist.isShuffled);
   const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
 
-  const { handleLikeTrack, isLiked } = useLikeTrack(currentTrack);
+  const { handleLikeTrack, isLiked } = useLikeTrack(currentTrack as TrackType);
 
   useEffect(() => {
     const audio = audioRef.current;
 
     if (audio && currentTrack) {
       audio.src = currentTrack.track_file;
-
       audio.loop = isLoop;
-
       audio.play();
       dispatch(setIsPlaying(true));
     }
@@ -47,21 +43,16 @@ const Player = () => {
     }
   }, [isLoop]);
 
-  // Мемоизация функций управления плеером
   const handlePlay = useCallback(() => {
     const audio = audioRef.current;
     if (audio) {
       if (isPlaying) {
         audio.pause();
+        dispatch(setIsPlaying(false));
       } else {
         audio.play();
+        dispatch(setIsPlaying(true));
       }
-    }
-
-    if (isPlaying) {
-      dispatch(setIsPlaying(false));
-    } else {
-      dispatch(setIsPlaying(true));
     }
   }, [isPlaying, dispatch]);
 
@@ -92,6 +83,7 @@ const Player = () => {
   }
 
   const { name, author, track_file } = currentTrack;
+  const duration = audioRef.current?.duration || 0;
 
   return (
     <div className={styles.bar}>

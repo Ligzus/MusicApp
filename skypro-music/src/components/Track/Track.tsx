@@ -9,24 +9,23 @@ import { memo } from "react";
 
 type TrackProps = {
   track: TrackType;
-  trackData: TrackType[];
 };
 
-const Track = ({ track, trackData }: TrackProps) => {
+const Track = ({ track }: TrackProps) => {
   const dispatch = useAppDispatch();
 
-  const handleTrackClick = () => {
-    dispatch(setCurrentTrack({ track, trackData }));
-  };
-
-  const { name, author, album, duration_in_seconds, _id } = track;
-
   const currentTrack = useAppSelector((state) => state.playlist.currentTrack);
-  const isPlayingTrack = currentTrack ? currentTrack._id === _id : false;
-
   const isPlaying = useAppSelector((state) => state.playlist.isPlaying);
 
+  const isPlayingTrack = currentTrack ? currentTrack._id === track._id : false;
+
+  const handleTrackClick = () => {
+    dispatch(setCurrentTrack(track));
+  };
+
   const { handleLikeTrack, isLiked } = useLikeTrack(track);
+
+  const { name, author, album, duration_in_seconds } = track;
 
   return (
     <div onClick={handleTrackClick} className={styles.playlistItem}>
