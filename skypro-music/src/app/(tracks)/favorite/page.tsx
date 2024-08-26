@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getFavoriteTracks } from "@/store/features/playlistSlice";
@@ -12,8 +13,14 @@ const FavoriteTracks = () => {
   const likedTracks = useAppSelector((state) => state.playlist.likedTracks);
   const accessToken = useAppSelector((state) => state.user.access);
   const refreshToken = useAppSelector((state) => state.user.refresh);
+  const router = useRouter();
 
   useEffect(() => {
+    if (!accessToken) {
+      router.push("/");
+      return;
+    }
+
     const fetchFavoriteTracks = async () => {
       try {
         await dispatch(
@@ -29,7 +36,7 @@ const FavoriteTracks = () => {
     };
 
     fetchFavoriteTracks();
-  }, [accessToken, refreshToken]);
+  }, [accessToken, refreshToken, dispatch, router]);
 
   return (
     <>
