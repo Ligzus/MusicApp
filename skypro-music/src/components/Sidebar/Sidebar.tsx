@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import styles from "./Sidebar.module.css";
@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { logout } from "@/store/features/userSlice";
 
 const Sidebar = () => {
-  const user = useAppSelector(state => state.user);
+  const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const handleLogoutClick = () => {
@@ -29,7 +29,7 @@ const Sidebar = () => {
       <div className={styles.sidebarBlock}>
         <div className={styles.sidebarList}>
           <div className={styles.sidebarItem}>
-            <a className={styles.sidebarLink} href="#">
+            <Link className={styles.sidebarLink} href="/2">
               <Image
                 className={styles.sidebarImg}
                 src="/img/playlist01.png"
@@ -37,10 +37,10 @@ const Sidebar = () => {
                 width={250}
                 height={150}
               />
-            </a>
+            </Link>
           </div>
           <div className={styles.sidebarItem}>
-            <a className={styles.sidebarLink} href="#">
+            <Link className={styles.sidebarLink} href="/3">
               <Image
                 className={styles.sidebarImg}
                 src="/img/playlist02.png"
@@ -48,10 +48,10 @@ const Sidebar = () => {
                 width={250}
                 height={150}
               />
-            </a>
+            </Link>
           </div>
           <div className={styles.sidebarItem}>
-            <a className={styles.sidebarLink} href="#">
+            <Link className={styles.sidebarLink} href="/4">
               <Image
                 className={styles.sidebarImg}
                 src="/img/playlist03.png"
@@ -59,7 +59,7 @@ const Sidebar = () => {
                 width={250}
                 height={150}
               />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

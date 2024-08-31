@@ -1,6 +1,9 @@
+"use client";
+
 import { TrackType } from "@/types/tracks";
 import styles from "./Playlist.module.css";
 import Track from "../Track/Track";
+import { memo } from "react";
 
 type PlaylistProps = {
   tracks: TrackType[];
@@ -24,13 +27,11 @@ const Playlist = ({ tracks, error }: PlaylistProps) => {
         {error ? (
           <p>{error}</p>
         ) : (
-          tracks.map((track) => (
-            <Track key={track._id} track={track} trackData={tracks} />
-          ))
+          tracks.map((track) => <Track key={track._id} track={track} />)
         )}
       </div>
     </div>
   );
 };
 
-export default Playlist;
+export default memo(Playlist);

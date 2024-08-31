@@ -6,31 +6,24 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { logout } from "@/store/features/userSlice";
+import Link from "next/link";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
 
-  const user = useAppSelector(state => state.user);
+  const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const navToSignin = () => {
-    router.push("signin")
-  }
+    router.push("signin");
+  };
 
   const navLogout = () => {
     if (user) {
       dispatch(logout());
     }
-  }
-
-  const navToFavotiteTracks = () => {
-    router.push("favorite")
-  }
-
-  const navToMain = () => {
-    router.push("/")
-  }
+  };
 
   return (
     <nav className={styles.mainNav}>
@@ -55,20 +48,21 @@ const Nav = () => {
         <div className={styles.navMenu}>
           <ul className={styles.menuList}>
             <li className={styles.menuItem}>
-              <a href="#" className={styles.menuLink} onClick={navToMain}>
+              <Link href="/" className={styles.menuLink}>
                 Главное
-              </a>
+              </Link>
             </li>
-            {user.username 
-              ? <li className={styles.menuItem} onClick={navToFavotiteTracks}>
-                  <a href="#" className={styles.menuLink}>
-                    Мой плейлист
-                  </a>
-                </li>
-
-              : null  
-              }
-            <li className={styles.menuItem} onClick={user ? navToSignin : navLogout}>
+            {user.username ? (
+              <li className={styles.menuItem}>
+                <Link href="/favorite" className={styles.menuLink}>
+                  Мой плейлист
+                </Link>
+              </li>
+            ) : null}
+            <li
+              className={styles.menuItem}
+              onClick={user ? navToSignin : navLogout}
+            >
               <a href="#" className={styles.menuLink}>
                 {user.username ? "Выйти" : "Войти"}
               </a>

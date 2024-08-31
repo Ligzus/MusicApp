@@ -4,14 +4,18 @@ type GenreFilterProps = {
   title: string;
   isActive: boolean;
   list: string[];
+  selectedGenres: string[];
   handleFilter: () => void;
+  onGenreChange: (genre: string) => void;
 };
 
 const GenreFilter = ({
   title,
   isActive,
-  list,
+  list = [],
+  selectedGenres = [],
   handleFilter,
+  onGenreChange,
 }: GenreFilterProps) => {
   return (
     <div>
@@ -24,12 +28,32 @@ const GenreFilter = ({
         onClick={handleFilter}
       >
         {title}
+        {selectedGenres.length !== 0 && (
+          <div
+            className={
+              isActive
+                ? `${styles.counterGenresActive}`
+                : `${styles.counterGenres}`
+            }
+          >
+            <span>{selectedGenres.length}</span>
+          </div>
+        )}
       </div>
       {isActive && (
         <div className={styles.popup}>
-          <ul>
+          <ul className={styles.authorList}>
             {list.map((genre, index) => (
-              <li key={index}>{genre}</li>
+              <li
+                key={index}
+                className={styles.authorItem}
+                onClick={() => onGenreChange(genre)}
+              >
+                {genre}
+                {selectedGenres.includes(genre) && (
+                  <span className={styles.checkmark}>✔</span>
+                )}
+              </li>
             ))}
           </ul>
         </div>

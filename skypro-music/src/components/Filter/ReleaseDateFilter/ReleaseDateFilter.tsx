@@ -3,20 +3,21 @@ import styles from "../Filter.module.css";
 type ReleaseDateFilterProps = {
   title: string;
   isActive: boolean;
-  list: string[];
   handleFilter: () => void;
+  onSortChange: (order: string) => void;
 };
 
 const ReleaseDateFilter = ({
   title,
   isActive,
-  list,
   handleFilter,
+  onSortChange,
 }: ReleaseDateFilterProps) => {
-  const getYearFromDate = (dateString: string): string => {
-    const date = new Date(dateString);
-    return date.getFullYear().toString();
-  };
+  const sortOptions = [
+    { label: "По умолчанию", value: "default" },
+    { label: "Сначала новые", value: "newest" },
+    { label: "Сначала старые", value: "oldest" },
+  ];
 
   return (
     <div>
@@ -32,9 +33,18 @@ const ReleaseDateFilter = ({
       </div>
       {isActive && (
         <div className={styles.popup}>
-          <ul>
-            {list.map((release_date, index) => (
-              <li key={index}>{getYearFromDate(release_date)}</li>
+          <ul className={styles.sortList}>
+            {sortOptions.map((option, index) => (
+              <li
+                key={index}
+                className={styles.sortItem}
+                onClick={() => {
+                  onSortChange(option.value);
+                  handleFilter(); // Закрываем фильтр после выбора опции
+                }}
+              >
+                {option.label}
+              </li>
             ))}
           </ul>
         </div>

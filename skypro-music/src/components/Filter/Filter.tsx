@@ -1,35 +1,48 @@
-"use client";
-
+import { useEffect, useState, useMemo } from "react";
 import { TrackType } from "@/types/tracks";
 import styles from "./Filter.module.css";
 import AuthorFilter from "./AuthorFilter/AuthorFilter";
-import { getUniqueValues } from "@/utils/getUniqueValues";
-import { useEffect, useState } from "react";
 import ReleaseDateFilter from "./ReleaseDateFilter/ReleaseDateFilter";
 import GenreFilter from "./GenreFilter/GenreFilter";
-
-const SORT_OPTIONS = ["По умолчанию", "Сначала новые", "Сначала старые"];
+import { getUniqueValues } from "@/utils/getUniqueValues";
 
 type FilterProps = {
   tracks: TrackType[];
+  selectedAuthors: string[];
+  selectedGenres: string[];
+  onAuthorChange: (author: string) => void;
+  onGenreChange: (genre: string) => void;
+  onSortChange: (order: string) => void;
 };
 
-const Filter = ({ tracks }: FilterProps) => {
+const Filter = ({
+  tracks,
+  selectedAuthors,
+  selectedGenres,
+  onAuthorChange,
+  onGenreChange,
+  onSortChange,
+}: FilterProps) => {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
-  function handleFilter(filter: string) {
+  // Мемоизация уникальных авторов и жанров
+  const uniqueAuthors = useMemo(
+    () => getUniqueValues(tracks, "author"),
+    [tracks],
+  );
+  const uniqueGenres = useMemo(
+    () => getUniqueValues(tracks, "genre"),
+    [tracks],
+  );
+
+  const handleFilter = (filter: string) => {
     setActiveFilter((prev) => (prev === filter ? null : filter));
-  }
+  };
 
-  const uniqueAuthors = getUniqueValues(tracks, "author");
-  const uniqueReleaseDate = getUniqueValues(tracks, "release_date");
-  const uniqueGenre = getUniqueValues(tracks, "genre");
-
-  // Чтобы фильтры скрывались при нажатии на экран (ChatGPT подсказал):
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (!target.closest(`.${styles.centerblockFilter}`)) {
+      if (!target.closest(`.${styles.centerblockFilter}`) && activeFilter) {
         setActiveFilter(null);
       }
     };
@@ -39,7 +52,7 @@ const Filter = ({ tracks }: FilterProps) => {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, [activeFilter]);
 
   return (
     <div className={styles.centerblockFilter}>
@@ -48,19 +61,24 @@ const Filter = ({ tracks }: FilterProps) => {
         title="исполнителю"
         isActive={activeFilter === "author"}
         list={uniqueAuthors}
+        selectedAuthors={selectedAuthors}
         handleFilter={() => handleFilter("author")}
+        onAuthorChange={onAuthorChange}
       />
+
       <ReleaseDateFilter
         title="году"
         isActive={activeFilter === "release_date"}
-        list={uniqueReleaseDate}
         handleFilter={() => handleFilter("release_date")}
+        onSortChange={onSortChange}
       />
       <GenreFilter
         title="жанру"
         isActive={activeFilter === "genre"}
-        list={uniqueGenre}
+        list={uniqueGenres}
+        selectedGenres={selectedGenres}
         handleFilter={() => handleFilter("genre")}
+        onGenreChange={onGenreChange}
       />
     </div>
   );
