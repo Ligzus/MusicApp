@@ -20,7 +20,7 @@ export default function SignIn() {
     if (!email.includes("@")) {
       return "Почта должна содержать '@'.";
     }
-    return "";
+    return;
   };
 
   const validatePassword = (password: string) => {
@@ -34,7 +34,7 @@ export default function SignIn() {
     if (commonPasswords.includes(password)) {
       return "Введённый пароль слишком широко распространён.";
     }
-    return "";
+    return;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -53,8 +53,14 @@ export default function SignIn() {
       await dispatch(login({ email, password })).unwrap();
       router.push("/");
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        setError(error.message);
+      if (
+        typeof error === "object" &&
+        error !== null &&
+        "message" in error &&
+        typeof (error as { message: string }).message === "string"
+      ) {
+        setError((error as { message: string }).message);
+        console.log((error as { message: string }).message);
       }
     }
   };

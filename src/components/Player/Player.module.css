@@ -303,7 +303,7 @@
   display: none;
 }
 
-@media(max-width: 763px) {
+@media (max-width: 763px) {
   .playerControls {
     padding: 10px 0px 10px 15px;
   }
@@ -322,11 +322,15 @@
     position: relative;
   }
 
-  .playerBtnNext,  .playerBtnPlay,  .playerBtnPrev,  .playerBtnRepeat {
+  .playerBtnNext,
+  .playerBtnPlay,
+  .playerBtnPrev,
+  .playerBtnRepeat {
     margin-right: 10px;
   }
 
-  .trackPlayLikeDis, .trackPlayLikeSvg {
+  .trackPlayLikeDis,
+  .trackPlayLikeSvg {
     margin-left: 10px;
   }
 
@@ -342,5 +346,4 @@
   .trackPlayLikeSvg {
     margin: 0;
   }
-
 }

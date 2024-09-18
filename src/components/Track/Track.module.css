@@ -182,7 +182,6 @@
   color: #696969;
 }
 
-
 @media (max-width: 1600px) {
   .trackTitleImage {
     margin-right: 8px;
@@ -191,10 +190,12 @@
     padding: 8px;
   }
 
-  .trackTitleLink, .trackAlbumLink, .trackAuthorLink {
+  .trackTitleLink,
+  .trackAlbumLink,
+  .trackAuthorLink {
     font-size: 14px;
   }
-  
+
   .trackTimeText {
     font-size: 14px;
   }
@@ -208,10 +209,12 @@
     padding: 8px;
   }
 
-  .trackTitleLink, .trackAlbumLink, .trackAuthorLink {
+  .trackTitleLink,
+  .trackAlbumLink,
+  .trackAuthorLink {
     font-size: 12px;
   }
-  
+
   .trackTimeText {
     font-size: 12px;
   }

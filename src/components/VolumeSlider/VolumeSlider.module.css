@@ -47,7 +47,7 @@
   cursor: pointer;
 }
 
-@media(max-width: 763px) {
+@media (max-width: 763px) {
   .volumeImage {
     display: none;
   }

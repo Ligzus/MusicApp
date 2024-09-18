@@ -54,7 +54,7 @@ const Track = ({ track }: TrackProps) => {
                 {name} <span className={styles.trackTitleSpan} />
               </span>
             </div>
-          </div>          
+          </div>
         </div>
         <div className={styles.trackAuthor}>
           <span className={styles.trackAuthorLink}>{author}</span>

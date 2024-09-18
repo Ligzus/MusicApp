@@ -3,7 +3,7 @@
 import styles from "./page.module.css";
 import { useState } from "react";
 import { useAppDispatch } from "@/hooks";
-import { register } from "@/store/features/userSlice";
+import { login, register } from "@/store/features/userSlice";
 import { useRouter } from "next/navigation";
 
 export default function SignUp() {
@@ -18,10 +18,13 @@ export default function SignUp() {
     if (!email.includes("@")) {
       return "Почта должна содержать '@'.";
     }
-    return "";
+    return;
   };
 
   const validatePassword = (password: string) => {
+    if (username.length < 3) {
+      return "Имя пользователя должно содержать как минимум 3 символа.";
+    }
     if (password.length < 8) {
       return "Введённый пароль слишком короткий. Он должен содержать как минимум 8 символов.";
     }
@@ -32,7 +35,7 @@ export default function SignUp() {
     if (commonPasswords.includes(password)) {
       return "Введённый пароль слишком широко распространён.";
     }
-    return "";
+    return;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -49,11 +52,17 @@ export default function SignUp() {
     }
     try {
       await dispatch(register({ email, password, username })).unwrap();
+      dispatch(login({ email, password })).unwrap();
       router.push("/");
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        let errorMessage = error.message;
-        setError(errorMessage);
+      if (
+        typeof error === "object" &&
+        error !== null &&
+        "message" in error &&
+        typeof (error as { message: string }).message === "string"
+      ) {
+        setError((error as { message: string }).message);
+        console.log((error as { message: string }).message);
       }
     }
   };

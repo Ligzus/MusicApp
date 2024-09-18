@@ -18,7 +18,7 @@ const Nav = () => {
   const navToSignin = () => {
     router.push("signin");
     dispatch(logout());
-  };  
+  };
 
   const navLogout = () => {
     if (user) {
