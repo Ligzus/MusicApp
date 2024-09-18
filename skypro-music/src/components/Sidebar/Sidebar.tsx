@@ -5,16 +5,28 @@ import styles from "./Sidebar.module.css";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { logout } from "@/store/features/userSlice";
+import { useEffect, useState } from "react";
 
 const Sidebar = () => {
+  const [isClient, setIsClient] = useState(false);
   const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+
+  // Устанавливаем isClient в true только на клиентской стороне
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleLogoutClick = () => {
     if (user.username) {
       dispatch(logout());
     }
   };
+
+  // Условный рендеринг в зависимости от isClient
+  if (!isClient) {
+    return null; // Или какой-то другой индикатор загрузки
+  }
 
   return (
     <div className={styles.mainSidebar}>

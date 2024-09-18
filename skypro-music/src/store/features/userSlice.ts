@@ -6,6 +6,27 @@ import {
   getToken,
 } from "../../api/user";
 
+type UserStateType = {
+  email: string;
+  username: string;
+  access: string | null;
+  refresh: string | null;
+};
+
+const saveToLocalStorage = (state: UserStateType) => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("user", JSON.stringify(state));
+  }
+};
+
+const loadFromLocalStorage = (): UserStateType | null => {
+  if (typeof window !== "undefined") {
+    const savedUser = localStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  }
+  return null;
+};
+
 export const login = createAsyncThunk(
   "user/login",
   async (userInfo: { email: string; password: string }) => {
@@ -36,14 +57,7 @@ export const refreshAccessToken = createAsyncThunk(
   },
 );
 
-type UserStateType = {
-  email: string;
-  username: string;
-  access: string | null;
-  refresh: string | null;
-};
-
-const initialState: UserStateType = {
+const initialState: UserStateType = loadFromLocalStorage() || {
   email: "",
   username: "",
   access: null,
@@ -59,6 +73,10 @@ const userSlice = createSlice({
       state.username = "";
       state.access = null;
       state.refresh = null;
+      saveToLocalStorage(state);
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("user");
+      }
     },
   },
   extraReducers: (builder) => {
@@ -68,15 +86,18 @@ const userSlice = createSlice({
         state.username = action.payload.username;
         state.access = action.payload.access;
         state.refresh = action.payload.refresh;
+        saveToLocalStorage(state);
       })
       .addCase(register.fulfilled, (state, action) => {
         state.email = action.payload.email;
         state.username = action.payload.username;
         state.access = action.payload.access;
         state.refresh = action.payload.refresh;
+        saveToLocalStorage(state);
       })
       .addCase(refreshAccessToken.fulfilled, (state, action) => {
         state.access = action.payload.access;
+        saveToLocalStorage(state);
       });
   },
 });
