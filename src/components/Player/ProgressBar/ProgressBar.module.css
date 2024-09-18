@@ -62,7 +62,7 @@
 
 .trakTimeBlock {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin-bottom: 5px;
   padding-left: 10px;
   padding-right: 10px;
