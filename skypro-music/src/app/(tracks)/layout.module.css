@@ -34,3 +34,23 @@
   flex-grow: 3;
   padding: 20px 40px 20px 111px;
 }
+
+
+
+@media (max-width: 1600px) {
+  .mainCenterblock {
+    padding-left: 50px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .mainCenterblock {
+    padding-left: 40px;
+  }
+}
+
+@media (max-width: 1104px) {
+  .mainCenterblock {
+    padding-top: 0px;
+  }
+}

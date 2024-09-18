@@ -18,7 +18,7 @@ const MainTrackPage = async () => {
   }
 
   return (
-    <div>
+    <div className={styles.centerblock}>
       <h2 className={styles.centerblockH2}>Треки</h2>
       <TrackSearch tracks={tracks} error={error} />
     </div>

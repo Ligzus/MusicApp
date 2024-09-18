@@ -28,12 +28,13 @@
 .playlistTitleCol01 {
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 14x;
   line-height: 24px;
   letter-spacing: 2px;
   color: #696969;
   text-transform: uppercase;
-  width: 447px;
+  max-width: 447px;
+  min-width: 260px;
 }
 
 .playlistTitleCol02 {
@@ -44,7 +45,8 @@
   letter-spacing: 2px;
   color: #696969;
   text-transform: uppercase;
-  width: 321px;
+  max-width: 321px;
+  min-width: 180px;
 }
 
 .playlistTitleCol03 {
