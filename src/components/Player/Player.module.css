@@ -309,7 +309,17 @@
   }
 
   .trackPlayContain {
+    position: absolute;
+    top: -51px;
+    left: -180px;
+  }
+
+  .trackPlayImage {
     display: none;
+  }
+
+  .playerTrackPlay {
+    position: relative;
   }
 
   .playerBtnNext,  .playerBtnPlay,  .playerBtnPrev,  .playerBtnRepeat {
@@ -318,6 +328,10 @@
 
   .trackPlayLikeDis, .trackPlayLikeSvg {
     margin-left: 10px;
+  }
+
+  .trackPlayAlbumLink {
+    font-size: 11px;
   }
 
   .trackPlayLike {
