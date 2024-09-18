@@ -49,10 +49,12 @@ const Track = ({ track }: TrackProps) => {
             )}
           </div>
           <div className={styles.trackTitleText}>
-            <span className={styles.trackTitleLink}>
-              {name} <span className={styles.trackTitleSpan} />
-            </span>
-          </div>
+            <div>
+              <span className={styles.trackTitleLink}>
+                {name} <span className={styles.trackTitleSpan} />
+              </span>
+            </div>
+          </div>          
         </div>
         <div className={styles.trackAuthor}>
           <span className={styles.trackAuthorLink}>{author}</span>

@@ -112,6 +112,7 @@
 
 .popup {
   position: absolute;
+  z-index: 2;
   background-color: #313131;
   border-radius: 10px;
   margin-top: 8px;
@@ -171,4 +172,51 @@
 
 .popup span:hover {
   text-decoration: none;
+}
+
+@media (max-width: 772px) {
+  .filterButton {
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+
+  .filterButtonOpen {
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+
+  .filterTitle {
+    font-size: 14px;
+    margin-right: 8px;
+  }
+
+  .centerblockFilter {
+    margin-bottom: 15px;
+  }
+
+  .popup {
+    right: 0;
+    width: auto;
+  }
+
+  .popup ul {
+    padding: 10px;
+  }
+
+  .counterAuthor {
+    margin-left: 75px;
+  }
+
+  .counterAuthorActive {
+    margin-left: 70px;
+  }
+
+  .counterGenres {
+    margin-left: 30px;
+  }
+
+  .counterGenresActive {
+    margin-left: 25px;
+  }
+  
 }

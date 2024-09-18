@@ -1,5 +1,5 @@
 .bar {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -301,4 +301,32 @@
 
 .audio {
   display: none;
+}
+
+@media(max-width: 763px) {
+  .playerControls {
+    padding: 10px 0px 10px 15px;
+  }
+
+  .trackPlayContain {
+    display: none;
+  }
+
+  .playerBtnNext,  .playerBtnPlay,  .playerBtnPrev,  .playerBtnRepeat {
+    margin-right: 10px;
+  }
+
+  .trackPlayLikeDis, .trackPlayLikeSvg {
+    margin-left: 10px;
+  }
+
+  .trackPlayLike {
+    display: flex;
+    align-items: center;
+  }
+
+  .trackPlayLikeSvg {
+    margin: 0;
+  }
+
 }

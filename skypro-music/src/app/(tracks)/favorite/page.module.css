@@ -1,8 +1,6 @@
 .wrapper {
   width: 100%;
   min-height: 100%;
-  overflow: hidden;
-  background-color: #383838;
 }
 
 .container {
@@ -43,3 +41,4 @@
   letter-spacing: -0.8px;
   margin-bottom: 45px;
 }
+

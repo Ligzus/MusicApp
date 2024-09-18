@@ -137,3 +137,31 @@
     display: block;
   }
 }
+
+  @media (max-width: 1104px) {
+    .mainNav {
+      padding: 20px 15px 0px 15px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .mainNav {
+      padding: 20px 15px 0px 15px;
+    }
+
+    .menuList {
+      position: absolute;
+      flex-direction: column;
+      right: -190px;
+      top: 30px;
+    }
+
+    .navBurger {
+      z-index: 4;
+      transition: all 0.3s;
+    }
+
+    .navBurger:active {
+      transform: rotate(90deg);
+    }
+  }

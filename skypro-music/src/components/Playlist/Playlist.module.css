@@ -88,7 +88,7 @@
   -ms-flex-direction: column;
   flex-direction: column;
   overflow: auto;
-  height: 700px;
+  height: 680px;
 }
 
 .contentPlaylist::-webkit-scrollbar {
@@ -99,4 +99,20 @@
 .contentPlaylist p {
   margin: auto;
   margin-top: 100px;
+}
+
+
+@media (max-width: 772px) {
+  .playlistTitleCol01 {
+    min-width: 180px;
+  }
+  
+  .playlistTitleCol02 {
+    display: none;
+  }
+  
+  .playlistTitleCol03 {
+    display: none;
+  }
+  
 }

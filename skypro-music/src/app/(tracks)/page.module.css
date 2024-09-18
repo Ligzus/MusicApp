@@ -20,3 +20,10 @@
     margin-bottom: 28px;
   }
 }
+
+@media (max-width: 1024px) {
+  .centerblockH2 {
+    font-size: 32px;
+    margin-bottom: 0px;
+  }
+}
