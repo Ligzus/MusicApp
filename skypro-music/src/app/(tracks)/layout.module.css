@@ -1,8 +1,8 @@
 .wrapper {
   width: 100%;
   min-height: 100%;
-  overflow: hidden;
-  background-color: #383838;
+  overflow: auto;
+  background-color: #181818;
 }
 
 .container {
@@ -33,4 +33,32 @@
   -ms-flex-positive: 3;
   flex-grow: 3;
   padding: 20px 40px 20px 111px;
+  margin-bottom: 30px;
+}
+
+
+
+@media (max-width: 1600px) {
+  .mainCenterblock {
+    padding-left: 50px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .mainCenterblock {
+    padding-left: 40px;
+  }
+}
+
+@media (max-width: 1104px) {
+  .mainCenterblock {
+    padding-top: 0px;
+  }
+}
+
+
+@media (max-width: 1104px) {
+  .mainCenterblock {
+    padding: 0px 15px 0px 15px;
+  }
 }

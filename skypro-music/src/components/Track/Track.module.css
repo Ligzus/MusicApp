@@ -68,7 +68,8 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  width: 447px;
+  max-width: 447px;
+  min-width: 260px;
 }
 
 .trackTitleImage {
@@ -126,7 +127,8 @@
 }
 
 .trackAuthor {
-  width: 321px;
+  max-width: 321px;
+  min-width: 180px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -145,7 +147,8 @@
 }
 
 .trackAlbum {
-  width: 245px;
+  max-width: 245px;
+  min-width: 230px;
 }
 
 .trackAlbumLink {
@@ -177,4 +180,68 @@
   line-height: 24px;
   text-align: right;
   color: #696969;
+}
+
+
+@media (max-width: 1600px) {
+  .trackTitleImage {
+    margin-right: 8px;
+    width: 41px;
+    height: 41px;
+    padding: 8px;
+  }
+
+  .trackTitleLink, .trackAlbumLink, .trackAuthorLink {
+    font-size: 14px;
+  }
+  
+  .trackTimeText {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1399px) {
+  .trackTitleImage {
+    margin-right: 8px;
+    width: 35px;
+    height: 35px;
+    padding: 8px;
+  }
+
+  .trackTitleLink, .trackAlbumLink, .trackAuthorLink {
+    font-size: 12px;
+  }
+  
+  .trackTimeText {
+    font-size: 12px;
+  }
+
+  .trackTime {
+    align-items: end;
+  }
+}
+
+@media (max-width: 772px) {
+  .playlistItem {
+    position: relative;
+  }
+
+  .trackTitle {
+    min-width: 180px;
+    align-items: flex-start;
+  }
+
+  .trackAuthor {
+    position: absolute;
+    left: 42px;
+    top: 17px;
+  }
+
+  .trackAuthorLink {
+    opacity: 40%;
+  }
+
+  .trackAlbum {
+    display: none;
+  }
 }

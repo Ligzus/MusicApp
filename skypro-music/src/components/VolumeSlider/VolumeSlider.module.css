@@ -46,3 +46,13 @@
   width: 109px;
   cursor: pointer;
 }
+
+@media(max-width: 763px) {
+  .volumeImage {
+    display: none;
+  }
+
+  .barVolumeBlock {
+    padding-right: 10px;
+  }
+}

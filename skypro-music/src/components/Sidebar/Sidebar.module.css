@@ -1,5 +1,5 @@
 .mainSidebar {
-  max-width: 418px;
+  max-width: 100%;
   padding: 20px 90px 20px 78px;
 }
 
@@ -65,4 +65,64 @@
 .sidebarImg {
   width: 100%;
   height: auto;
+}
+
+
+@media (max-width: 1600px) {
+  .mainSidebar {
+    padding: 20px 20px 20px 10px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .mainSidebar {
+    position: absolute;
+    top: 300px;
+    padding: 0px 20px 0px 30px;
+  }
+
+  .sidebarBlock {
+    height: 100%;
+    padding: 0;
+  }
+
+  .sidebarPersonal {
+    position: absolute;
+    top: -270px;
+    left: 65px;
+  }
+
+  .sidebarIcon {
+    display: none;
+  }
+
+}
+
+@media (max-width: 1104px) {
+  .mainSidebar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    position: static;
+  }
+
+  .sidebarBlock {
+    width: 100%;
+  }
+
+  .sidebarList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .sidebarItem {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 815px) {
+  .sidebarList {
+    flex-direction: column;
+  }
 }

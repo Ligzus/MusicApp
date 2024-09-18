@@ -1,5 +1,5 @@
 .mainNav {
-  width: 244px;
+  width: 200px;
   background-color: #181818;
   padding: 20px 0 20px 36px;
 }
@@ -62,3 +62,106 @@
   font-size: 16px;
   line-height: 24px;
 }
+
+
+@media (max-width: 1600px) {
+  .mainNav {
+    width: 160px;
+    background-color: #181818;
+    padding: 20px 0 20px 20px;
+  }
+
+  .menuLink {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .mainNav {
+    width: 280px;
+    background-color: #181818;
+    padding: 20px 0 20px 30px;
+  }
+
+  .menuLink {
+    font-size: 14px;
+  }
+
+  .logoImage {
+    display: none;
+  }
+
+  .navBurger {
+    position: absolute;
+    top: 36px;
+  }
+}
+
+@media (max-width: 1104px) {
+
+  .mainNav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .menuList {
+    display: flex;
+    gap: 20px;
+  }
+
+  .menuItem {
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  .menuList {
+    width: 300px;
+    display: flex;
+    padding: 0;
+    margin-left: 30px;
+  }
+
+  .navLogo {
+    margin-bottom: 0;
+  }
+
+  .navBurger {
+    position: absolute;
+    right: 20px;
+    top: 23px;
+  }
+
+  .logoImage {
+    display: block;
+  }
+}
+
+  @media (max-width: 1104px) {
+    .mainNav {
+      padding: 20px 15px 0px 15px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .mainNav {
+      padding: 20px 15px 0px 15px;
+    }
+
+    .menuList {
+      position: absolute;
+      flex-direction: column;
+      right: -190px;
+      top: 30px;
+    }
+
+    .navBurger {
+      z-index: 4;
+      transition: all 0.3s;
+    }
+
+    .navBurger:active {
+      transform: rotate(90deg);
+    }
+  }

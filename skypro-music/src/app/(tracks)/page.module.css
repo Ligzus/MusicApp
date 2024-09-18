@@ -1,8 +1,29 @@
 .centerblockH2 {
+  width: 100%;
   font-style: normal;
   font-weight: 400;
   font-size: 64px;
   line-height: 72px;
   letter-spacing: -0.8px;
   margin-bottom: 45px;
+}
+
+.centerblock {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1600px) {
+  .centerblockH2 {
+    font-size: 48px;
+    margin-bottom: 28px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .centerblockH2 {
+    font-size: 32px;
+    margin-bottom: 0px;
+  }
 }
