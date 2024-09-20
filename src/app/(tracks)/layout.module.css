@@ -2,6 +2,7 @@
   width: 100%;
   min-height: 100%;
   overflow: auto;
+  overflow-x: hidden;
   background-color: #181818;
 }
 
