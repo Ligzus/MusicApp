@@ -72,7 +72,8 @@ export default function SignIn() {
           <form className={styles.modalFormLogin} onSubmit={handleSubmit}>
             <a href="../">
               <div className={styles.modalLogo}>
-                <img src="../img/logo_modal.png" alt="logo" />
+                <img src="../img/logo.svg" alt="logo" />
+                <p>Papaya Music</p>
               </div>
             </a>
             <input

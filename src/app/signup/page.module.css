@@ -51,15 +51,24 @@
 }
 
 .modalLogo {
-  width: 140px;
-  height: 21px;
-  margin-bottom: 34px;
+  display: flex;
+  gap: 10px;
+  width: auto;
+  height: 60px;
+  margin-bottom: 20px;
   background-color: transparent;
 }
 
-.modal__logo img {
-  width: 140px;
+.modalLogo img {
+  width: 60px;
   height: auto;
+}
+
+.modalLogo p {
+  width: 55px;
+  color: #000000;
+  font-weight: 600;
+  align-content: center;
 }
 
 .modalInput {

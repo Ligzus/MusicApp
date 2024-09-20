@@ -5,10 +5,9 @@
 }
 
 .navLogo {
-  width: 113.33px;
-  height: 43px;
-  padding: 13px 0 13px 0;
-  background-color: transparent;
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
   margin-bottom: 20px;
 }
 
@@ -29,14 +28,16 @@
   justify-content: space-between;
 }
 
+.logoText {
+  align-content: center;
+}
+
 .navMenu {
   display: block;
   visibility: visible;
 }
 
 .logoImage {
-  width: 113.33px;
-  height: 17px;
   color: #181818;
 }
 
@@ -86,7 +87,8 @@
     font-size: 14px;
   }
 
-  .logoImage {
+  .logoImage,
+  .logoText {
     display: none;
   }
 
@@ -131,7 +133,8 @@
     top: 23px;
   }
 
-  .logoImage {
+  .logoImage,
+  .logoText {
     display: block;
   }
 }
@@ -139,6 +142,10 @@
 @media (max-width: 1104px) {
   .mainNav {
     padding: 20px 15px 0px 15px;
+  }
+
+  .navLogo {
+    margin-top: 0;
   }
 }
 

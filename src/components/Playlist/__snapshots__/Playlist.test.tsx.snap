@@ -61,15 +61,17 @@ exports[`Playlist рендерится корректно 1`] = `
             <div
               class="trackTitleText"
             >
-              <span
-                class="trackTitleLink"
-              >
-                Track 1
-                 
+              <div>
                 <span
-                  class="trackTitleSpan"
-                />
-              </span>
+                  class="trackTitleLink"
+                >
+                  Track 1
+                   
+                  <span
+                    class="trackTitleSpan"
+                  />
+                </span>
+              </div>
             </div>
           </div>
           <div
@@ -131,15 +133,17 @@ exports[`Playlist рендерится корректно 1`] = `
             <div
               class="trackTitleText"
             >
-              <span
-                class="trackTitleLink"
-              >
-                Track 2
-                 
+              <div>
                 <span
-                  class="trackTitleSpan"
-                />
-              </span>
+                  class="trackTitleLink"
+                >
+                  Track 2
+                   
+                  <span
+                    class="trackTitleSpan"
+                  />
+                </span>
+              </div>
             </div>
           </div>
           <div

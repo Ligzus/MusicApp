@@ -6,7 +6,7 @@ import ReduxProvider from "@/store/ReduxProvider";
 const montserrat = Montserrat({ subsets: ["cyrillic"] });
 
 export const metadata: Metadata = {
-  title: "Ligzus Music",
+  title: "Papaya Music",
   description: "Music from all over the world",
 };
 

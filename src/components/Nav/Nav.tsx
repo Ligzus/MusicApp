@@ -31,11 +31,12 @@ const Nav = () => {
       <div className={styles.navLogo}>
         <Image
           className={styles.logoImage}
-          src="/img/logo.png"
+          src="/img/logo.svg"
           alt="logo"
-          width={114}
-          height={17}
+          width={50}
+          height={50}
         />
+        <p className={styles.logoText}>Papaya Music</p>
       </div>
       <div
         onClick={() => setIsOpen((prev) => !prev)}
